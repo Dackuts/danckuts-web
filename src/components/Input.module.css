@@ -1,0 +1,32 @@
+.input-container {
+  --offset: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+label {
+  position: relative;
+  color: var(--color-primary-500);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  top: calc(-1 * var(--offset));
+  pointer-events: none;
+  cursor: text;
+}
+
+input[type="text"] {
+  width: 100%;
+  font-size: 1rem;
+  font-family: "Exo 2", sans-serif;
+  color: var(--color-primary-500);
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 2px var(--color-primary-300);
+  outline: none;
+}
+
+input[type="text"]:focus ~ label,
+input[type="text"]:valid ~ label {
+  top: calc(-1 * (1.75rem + var(--offset)));
+  pointer-events: initial;
+  cursor: initial;
+}

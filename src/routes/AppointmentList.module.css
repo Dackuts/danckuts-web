@@ -1,0 +1,183 @@
+.split {
+  display: flex;
+  height: 100%;
+}
+
+.split-a {
+  flex: 1;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.appointment-container {
+  margin: 2rem;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.appointment-scroll {
+  direction: rtl;
+  overflow-y: auto;
+  height: calc(100% - 6rem);
+}
+
+.appointment-header {
+  background-color: var(--background-3);
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.cancel-link {
+  margin: 0.5rem;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.cancel-link:hover {
+  color: var(--color-primary-500);
+}
+
+.split-b {
+  flex: 2;
+  position: relative;
+}
+
+.appointment {
+  direction: ltr;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+}
+
+.appointment.selected {
+  background-color: var(--color-primary-300);
+  color: var(--background);
+}
+
+.appointment.selected:hover {
+  background-color: var(--color-primary-500);
+}
+
+.appointment.selected > * {
+  color: var(--background);
+}
+
+.appointment:hover {
+  background-color: var(--background-2);
+}
+
+.appointment-heading {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-500);
+  font-style: italic;
+}
+
+.appointment-address {
+  margin: 0;
+  color: var(--color-primary-500);
+}
+
+.scheduler-container {
+  --v-padding: 1.5rem;
+  --h-padding: 1rem;
+  --v-margin: 10%;
+  --h-margin: 22%;
+  position: absolute;
+  top: var(--v-margin);
+  left: var(--h-margin);
+  height: calc(100% - 2 * var(--v-margin) - 2 * var(--v-padding));
+  width: max(20rem, calc(100% - 2 * var(--h-margin) - 2 * var(--h-padding)));
+  padding: var(--v-padding) var(--h-padding);
+}
+
+.appointment-info-container {
+  background-color: var(--background-3);
+  --margin: 5rem;
+  margin: var(--margin);
+  width: calc(100% - 2 * var(--margin));
+  height: calc(100% - 2 * var(--margin));
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-info-container.empty {
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointment-info-container.empty p {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.appointment-info {
+  /* background-color: var(--background);
+  --margin: 5rem;
+  margin: var(--margin);
+  width: calc(100% - 2 * var(--margin));
+  height: calc(100% - 2 * var(--margin));
+  display: flex;
+  flex-direction: column; */
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.appointment-info-label {
+  margin: 0;
+  font-weight: 700;
+}
+
+.appointment-info-content {
+  margin: 0;
+  color: var(--color-primary-500);
+}
+
+.appointment-reschedule,
+.appointment-cancel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  cursor: pointer;
+  color: var(--background);
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.button {
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-family: "Exo 2", sans-serif;
+}
+
+.appointment-reschedule {
+  background-color: var(--color-primary-300);
+}
+.appointment-reschedule:hover {
+  background-color: var(--color-primary-500);
+}
+
+.appointment-cancel {
+  background-color: var(--color-danger-300);
+}
+.appointment-cancel:hover {
+  background-color: var(--color-danger-500);
+}

@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  --background: #ffffff;
+  --background-2: #eeeeee;
+  --background-3: #dadada;
+  --background-alt: #fafafa;
+  --border: #e0e0e0;
+  --text-color: #000000;
+  --text-color-2: #525252;
+  --disabled-text: #bababa;
+  --color-primary-100: #ccecff;
+  --color-primary-300: #66b8e5;
+  --color-primary-500: #0084ca;
+  --color-primary-600: #0081d7;
+  --color-primary-700: #007de5;
+  --color-danger-300: #ff9797;
+  --color-danger-500: #ff6565;
+}
+
+body {
+  margin: 0;
+  font-family: "Exo 2", sans-serif;
+  background-color: var(--background-alt);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.loading-container-full {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.card {
+  background-color: var(--background);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-primary-500) var(--background);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-500);
+  border-radius: 10px;
+  border: 3px solid var(--background);
+}

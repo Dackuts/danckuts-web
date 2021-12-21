@@ -1,0 +1,7 @@
+.main {
+  --padding: 3rem;
+  --margin: 2rem;
+  width: min(60rem, calc(90vw - 2 * var(--margin) - 2 * var(--padding)));
+  height: 40rem;
+  margin: var(--margin);
+}

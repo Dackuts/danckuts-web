@@ -1,0 +1,1 @@
+{ "js/ts.implicitProjectConfig.checkJs": false, "exclude": ["node_modules"] }

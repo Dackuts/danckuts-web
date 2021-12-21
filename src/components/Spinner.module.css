@@ -1,0 +1,17 @@
+.spinner {
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-top: 4px solid var(--color-primary-500);
+  border-left: 4px solid var(--color-primary-500);
+  border-bottom: 4px solid var(--color-primary-500);
+  border-right: 4px solid rgba(255, 255, 255, 0);
+  animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
