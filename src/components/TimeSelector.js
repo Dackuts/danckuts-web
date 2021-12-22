@@ -17,13 +17,13 @@ export default function TimeSelector({ location, reschedule = false }) {
   useEffect(() => {
     async function fetchData() {
       const dates = getDates(selected);
-      const data = await getAvailability(dates);
+      const data = await getAvailability(dates, location);
       setAvailability(data);
       setLoading(false);
     }
     setLoading(true);
     fetchData();
-  }, [selected]);
+  }, [location, selected]);
 
   const week = datesFromInterval(
     Interval.fromDateTimes(
