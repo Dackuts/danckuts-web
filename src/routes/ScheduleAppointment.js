@@ -43,33 +43,35 @@ export default function ScheduleAppointment({ name, locations }) {
   }
 
   return loading ? (
-    <div className="loading-container-full">
+    <div className={`${styles["max-height"]} loading-container-full`}>
       <Spinner />
     </div>
   ) : confirmed ? (
     error ? (
-      <div className={styles["center-container"]}>
+      <div className={`${styles["max-height"]} ${styles["center-container"]}`}>
         <p className={styles["heading-center"]}>Something Went Wrong!</p>
         <p className={styles.error}>{JSON.stringify(error)}</p>
       </div>
     ) : (
-      <div className={styles["center-container"]}>
+      <div className={`${styles["max-height"]} ${styles["center-container"]}`}>
         <p className={styles["heading-center"]}>
-          Appointment {urlParams.rescheduled ? "Rescheduled" : "Confirmed"}!
+          Appointment{" "}
+          {urlParams.rescheduled === "true" ? "Rescheduled" : "Confirmed"}!
         </p>
       </div>
     )
   ) : (
     <div className={styles.container}>
       <p className={styles.heading}>
-        Confirm {urlParams.rescheduled ? "Rescheduling" : "Booking"}
+        Confirm {urlParams.rescheduled === "true" ? "Rescheduling" : "Booking"}
       </p>
       <p>
         Hello <span className={styles.name}>{name}</span>,
       </p>
       <p className={styles.info}>
         Please confirm the details below{" "}
-        {urlParams.rescheduled ? "rescheduling" : "booking"} your appointment.
+        {urlParams.rescheduled === "true" ? "rescheduling" : "booking"} your
+        appointment.
       </p>
       <p className={styles.title}>Date:</p>
       <p className={styles.property}>
@@ -81,7 +83,9 @@ export default function ScheduleAppointment({ name, locations }) {
       </p>
       <p className={styles.info}>
         By providing information and clicking on{" "}
-        {urlParams.rescheduled ? "Reschedule Appointment" : "Book Appointment"}{" "}
+        {urlParams.rescheduled === "true"
+          ? "Reschedule Appointment"
+          : "Book Appointment"}{" "}
         below you agree to our Privacy Policy and are expressly consenting for
         us to contact you by telephone, mobile device, email and including text
         message, automated or prerecorded means, even if your telephone number
@@ -99,7 +103,9 @@ export default function ScheduleAppointment({ name, locations }) {
         onClick={bookAppointment}
         type="submit"
         value={
-          urlParams.rescheduled ? "Reschedule Appointment" : "Book Appointment"
+          urlParams.rescheduled === "true"
+            ? "Reschedule Appointment"
+            : "Book Appointment"
         }
       />
     </div>
