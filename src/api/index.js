@@ -9,6 +9,7 @@ const api = axios.create({
 api.interceptors.request.use(
   async function (config) {
     const token = sessionStorage.getItem("token");
+    console.log(token);
     config.headers.authorization = `Bearer ${token || ""}`;
     return config;
   },

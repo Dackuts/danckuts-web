@@ -74,6 +74,7 @@ export default function AppointmentList({ locations }) {
               <TimeSelector
                 location={appointments[selectedAppointment].location}
                 reschedule={true}
+                appointmentId={appointments[selectedAppointment].id}
               />
             </div>
           ) : (

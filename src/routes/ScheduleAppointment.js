@@ -1,6 +1,6 @@
 import styles from "./ScheduleAppointment.module.css";
 import { keyBy as _keyBy } from "lodash";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Checkbox from "../components/Checkbox";
 import {
   postCreateAppointment,
@@ -8,8 +8,11 @@ import {
 } from "../api/appointments";
 import Spinner from "../components/Spinner";
 import { DateTime } from "luxon";
+import { sleep } from "../utils/time";
+import { useNavigate } from "react-router-dom";
 
 export default function ScheduleAppointment({ name, locations }) {
+  const navigate = useNavigate();
   const [terms, setTerms] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [error, setError] = useState(false);
@@ -22,7 +25,7 @@ export default function ScheduleAppointment({ name, locations }) {
   async function bookAppointment() {
     setLoading(true);
     try {
-      if (urlParams.rescheduled) {
+      if (urlParams.rescheduled !== "false") {
         await postRescheduleAppointment({
           appointmentId: urlParams.rescheduled,
           location: urlParams.location,
@@ -41,6 +44,17 @@ export default function ScheduleAppointment({ name, locations }) {
       setError(error);
     }
   }
+
+  useEffect(() => {
+    async function wait() {
+      if (confirmed && !error) {
+        await sleep(5000);
+        navigate("../");
+      }
+    }
+
+    wait();
+  }, [confirmed, error, navigate]);
 
   return loading ? (
     <div className={`${styles["max-height"]} loading-container-full`}>

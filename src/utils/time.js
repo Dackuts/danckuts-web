@@ -28,3 +28,7 @@ export function getDates(date) {
     (d) => d.toFormat("yyyy-LL-dd")
   );
 }
+
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

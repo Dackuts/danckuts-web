@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getMe, postChangeName } from "../api/auth";
 import Input from "../components/Input";
 import Spinner from "../components/Spinner";
+import styles from "./NameCheck.module.css";
 
 export default function NameCheck({ setName }) {
   const [loading, setLoading] = useState(true);
@@ -31,12 +32,12 @@ export default function NameCheck({ setName }) {
   }
 
   return loading ? (
-    <div className="loading-container-full">
+    <div className={styles["loading-container-full"]}>
       <Spinner />
     </div>
   ) : (
-    <div className="container">
-      <p className="heading">Name</p>
+    <div className={styles.container}>
+      <p className={styles.heading}>Name</p>
       <p>Please provide your name</p>
       <Input
         key="firstName"

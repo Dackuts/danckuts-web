@@ -6,7 +6,11 @@ import Spinner from "./Spinner";
 import styles from "./TimeSelector.module.css";
 import { useNavigate } from "react-router-dom";
 
-export default function TimeSelector({ location, reschedule = false }) {
+export default function TimeSelector({
+  location,
+  appointmentId,
+  reschedule = false,
+}) {
   const navigate = useNavigate();
   const [availability, setAvailability] = useState({});
   const [loading, setLoading] = useState(true);
@@ -112,7 +116,9 @@ export default function TimeSelector({ location, reschedule = false }) {
               <p
                 onClick={() =>
                   navigate(
-                    `/schedule?time=${d}&rescheduled=${reschedule}&location=${location}`
+                    `/schedule?time=${d}&rescheduled=${
+                      reschedule ? appointmentId : false
+                    }&location=${location}`
                   )
                 }
                 className={styles["time-text"]}

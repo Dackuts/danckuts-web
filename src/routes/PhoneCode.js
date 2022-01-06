@@ -15,7 +15,7 @@ export default function PhoneCode({ setToken }) {
 
   async function submitCode() {
     const { token } = await postCheckTextCode({ phoneNumber, code });
-    setToken("token", token);
+    setToken(token);
   }
 
   return awaitingToken ? (
