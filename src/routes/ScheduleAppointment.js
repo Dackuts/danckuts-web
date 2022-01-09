@@ -16,11 +16,15 @@ export default function ScheduleAppointment({ name, locations }) {
   const [terms, setTerms] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(locations == null);
   const urlParams = Object.fromEntries(
     new URLSearchParams(window.location.search).entries()
   );
   const keyedLocations = _keyBy(locations, "location");
+
+  useEffect(() => {
+    setLoading(locations == null);
+  }, [locations]);
 
   async function bookAppointment() {
     setLoading(true);
