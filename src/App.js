@@ -24,14 +24,14 @@ export default function App() {
     const urlParams = new URLSearchParams(window.location.search);
     const queryToken = urlParams.get("token");
     if (queryToken != null) {
-      sessionStorage.setItem("token", queryToken);
+      localStorage.setItem("token", queryToken);
     }
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     setStateToken(token);
   }, []);
 
   function setToken(token) {
-    sessionStorage.setItem("token", token);
+    localStorage.setItem("token", token);
     setStateToken(token);
   }
 
