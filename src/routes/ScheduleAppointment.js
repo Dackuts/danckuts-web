@@ -11,7 +11,7 @@ import { DateTime } from "luxon";
 import { sleep } from "../utils/time";
 import { useNavigate } from "react-router-dom";
 
-export default function ScheduleAppointment({ name, locations }) {
+export default function ScheduleAppointment({ name, dependents, locations }) {
   const navigate = useNavigate();
   const [terms, setTerms] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -20,7 +20,16 @@ export default function ScheduleAppointment({ name, locations }) {
   const urlParams = Object.fromEntries(
     new URLSearchParams(window.location.search).entries()
   );
+  const [dependent, setDependent] = useState(undefined);
   const keyedLocations = _keyBy(locations, "location");
+
+  useEffect(() => {
+    if (Array.isArray(dependents) && dependents.length === 0) {
+      setDependent(null);
+    } else {
+      setDependent(undefined)
+    }
+  }, [dependents]);
 
   useEffect(() => {
     setLoading(locations == null);
@@ -39,6 +48,7 @@ export default function ScheduleAppointment({ name, locations }) {
         await postCreateAppointment({
           location: urlParams.location,
           time: urlParams.time,
+          ...(dependent?.id != null && { dependent: dependent?.id }),
         });
       }
       setLoading(false);
@@ -78,6 +88,29 @@ export default function ScheduleAppointment({ name, locations }) {
         </p>
       </div>
     )
+  ) : dependent === undefined ? (
+    <div className={styles.container}>
+      <p className={styles.heading}>Select dependent</p>
+      {/* <p>{JSON.stringify(dependents)}</p> */}
+      {[
+        {
+          first_name: name.split(" ")[0],
+          last_name: name.split(" ")?.[1] ?? "",
+          id: null,
+        },
+        ...(dependents ?? []),
+      ].map((d) => (
+        <div
+          key={d.id}
+          className={styles["dependent-selector"]}
+          onClick={() => setDependent(d)}
+        >
+          <span>
+            {d.first_name} {d.last_name}
+          </span>
+        </div>
+      ))}
+    </div>
   ) : (
     <div className={styles.container}>
       <p className={styles.heading}>
@@ -89,7 +122,8 @@ export default function ScheduleAppointment({ name, locations }) {
       <p className={styles.info}>
         Please confirm the details below{" "}
         {urlParams.rescheduled === "true" ? "rescheduling" : "booking"} your
-        appointment.
+        appointment
+        {dependent?.id != null ? ` for ${dependent.first_name}.` : "."}
       </p>
       <p className={styles.title}>Date:</p>
       <p className={styles.property}>

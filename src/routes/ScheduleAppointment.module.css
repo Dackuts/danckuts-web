@@ -79,6 +79,18 @@ input[type="submit"]:disabled {
   height: 6.5rem;
 }
 
+.dependent-selector {
+  border: 2px solid var(--border);
+  border-radius: 0.4rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.dependent-selector:hover {
+  border-color: var(--color-primary-500)
+}
+
 @media only screen and (max-width: 1200px) {
   .max-height {
     height: 100vh;

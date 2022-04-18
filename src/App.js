@@ -10,6 +10,7 @@ import AppointmentList from "./routes/AppointmentList";
 export default function App() {
   const [token, setStateToken] = useState("");
   const [name, setName] = useState("");
+  const [dependents, setDependents] = useState(null);
   const [locations, setLocations] = useState(null);
 
   useEffect(() => {
@@ -49,10 +50,16 @@ export default function App() {
               <InfoCheck
                 name={name}
                 setName={setName}
+                setDependents={setDependents}
+                dependents={dependents}
                 token={token}
                 setToken={setToken}
               >
-                <ScheduleAppointment name={name} locations={locations} />
+                <ScheduleAppointment
+                  name={name}
+                  dependents={dependents}
+                  locations={locations}
+                />
               </InfoCheck>
             }
           />
@@ -62,6 +69,8 @@ export default function App() {
               <InfoCheck
                 name={name}
                 setName={setName}
+                setDependents={setDependents}
+                dependents={dependents}
                 token={token}
                 setToken={setToken}
               >

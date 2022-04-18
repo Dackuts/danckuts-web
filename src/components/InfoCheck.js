@@ -13,6 +13,8 @@ import styles from "./InfoCheck.module.css";
 export default function InfoCheck({
   setName,
   name,
+  setDependents,
+  dependents,
   token,
   setToken,
   children,
@@ -24,19 +26,23 @@ export default function InfoCheck({
   useEffect(() => {
     async function fetchData() {
       // eslint-disable-next-line eqeqeq
-      if (token != "" && name == "") {
+      if (token != "" && name == "" && dependents == null) {
         const {
-          user: { name },
+          user: { name, dependents },
         } = await getMe();
         setLoading(false);
         if (name) {
           setName(name);
         }
+        if (dependents) {
+          setDependents(dependents);
+        }
+      } else {
+        setStep("continue");
       }
-      setStep("continue");
     }
     fetchData();
-  }, [token, name, setName]);
+  }, [token, name, setName, setDependents, dependents]);
 
   async function nextStep(data) {
     setLoading(true);
@@ -44,7 +50,6 @@ export default function InfoCheck({
       if (step === "requestPhone") {
         setPhoneNumber(data);
         const userExists = await postCheckPhoneNumber({ phoneNumber: data });
-        console.log(userExists);
         if (userExists) {
           await postSendTextCode(data);
           setLoading(false);
