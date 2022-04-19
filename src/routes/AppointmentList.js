@@ -59,7 +59,7 @@ export default function AppointmentList({ locations, name, dependents }) {
                     <p className={styles["appointment-heading"]}>
                       {appointment.dependent != null
                         ? name.split(" ")[0]
-                        : "Jared2"}{" "}
+                        : depsById[appointment.dependent].first_name}{" "}
                       -{" "}{appointment.location}
                     </p>
                     <p className={styles["appointment-address"]}>

@@ -1,11 +1,12 @@
 import styles from "./SelectAppointment.module.css";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import Spinner from "../components/Spinner";
 import Map from "../components/Map";
+import { useNavigate } from "react-router-dom";
 import TimeSelector from "../components/TimeSelector";
 
 export default function SelectAppointment({ locations }) {
+  const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
 
   return (
@@ -44,10 +45,13 @@ export default function SelectAppointment({ locations }) {
             </div>
           )}
         </div>
-        <div className={styles["cancel-link-c"]}>
-          <Link to="/appointment-list" className={styles["cancel-link"]}>
+        <div
+          className={styles["cancel-link-c"]}
+          onClick={() => navigate("/appointment-list")}
+        >
+          <p className={styles["cancel-link"]}>
             Cancel or Reschedule
-          </Link>
+          </p>
         </div>
       </div>
       <div className={styles["split-b-map"]}>
