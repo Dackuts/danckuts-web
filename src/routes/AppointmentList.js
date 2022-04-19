@@ -7,7 +7,7 @@ import TimeSelector from "../components/TimeSelector";
 import { useNavigate } from "react-router-dom";
 import { keyBy as _keyBy } from "lodash";
 
-export default function AppointmentList({ locations }) {
+export default function AppointmentList({ locations, name, dependents }) {
   const navigate = useNavigate();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [appointments, setAppointments] = useState(null);
@@ -27,6 +27,14 @@ export default function AppointmentList({ locations }) {
   }
 
   const keyedLocations = _keyBy(locations, "location");
+
+  const depsById = _keyBy(
+    dependents.map((d) => ({
+      id: d.id,
+      name: `${d.first_name} ${d.last_name}`,
+    })),
+    "id"
+  );
 
   return (
     <div className={styles.split}>
@@ -84,11 +92,21 @@ export default function AppointmentList({ locations }) {
                   {appointments[selectedAppointment].location}
                 </p>
                 <div>
-                  <p className={styles["appointment-info-label"]}>Time:</p>
+                  <p className={styles["appointment-info-label"]}>Customer:</p>
                   <p className={styles["appointment-info-content"]}>
                     {DateTime.fromISO(
                       appointments[selectedAppointment].date
                     ).toFormat("cccc, LL/dd/yy h:mm a")}
+                  </p>
+                </div>
+                <div>
+                  <p className={styles["appointment-info-label"]}>Time:</p>
+                  <p className={styles["appointment-info-content"]}>
+                    {appointments?.[selectedAppointment]?.dependent == null
+                      ? name
+                      : depsById[
+                          appointments?.[selectedAppointment]?.dependent
+                        ]}
                   </p>
                 </div>
                 <div>

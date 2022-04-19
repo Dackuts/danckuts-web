@@ -74,7 +74,11 @@ export default function App() {
                 token={token}
                 setToken={setToken}
               >
-                <AppointmentList locations={locations} />
+                <AppointmentList
+                  name={name}
+                  dependents={dependents}
+                  locations={locations}
+                />
               </InfoCheck>
             }
           />
