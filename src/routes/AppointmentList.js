@@ -29,7 +29,7 @@ export default function AppointmentList({ locations, name, dependents }) {
   const keyedLocations = _keyBy(locations, "location");
 
   const depsById = _keyBy(
-    dependents.map((d) => ({
+    (dependents ?? []).map((d) => ({
       id: d.id,
       name: `${d.first_name} ${d.last_name}`,
     })),
