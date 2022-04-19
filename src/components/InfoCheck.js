@@ -55,6 +55,7 @@ export default function InfoCheck({
           setLoading(false);
           setStep("requestCode");
         } else {
+          setLoading(false);
           setStep("requestInfo");
         }
       }

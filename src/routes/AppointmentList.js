@@ -57,7 +57,10 @@ export default function AppointmentList({ locations, name, dependents }) {
                     }}
                   >
                     <p className={styles["appointment-heading"]}>
-                      {appointment.location}
+                      {appointment.dependent != null
+                        ? name.split(" ")[0]
+                        : "Jared2"}{" "}
+                      -{" "}{appointment.location}
                     </p>
                     <p className={styles["appointment-address"]}>
                       {DateTime.fromISO(appointment.date).toFormat(

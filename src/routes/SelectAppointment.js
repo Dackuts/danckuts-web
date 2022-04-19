@@ -44,9 +44,11 @@ export default function SelectAppointment({ locations }) {
             </div>
           )}
         </div>
-        <Link to="/appointment-list" className={styles["cancel-link"]}>
-          Cancel or Reschedule
-        </Link>
+        <div className={styles["cancel-link-c"]}>
+          <Link to="/appointment-list" className={styles["cancel-link"]}>
+            Cancel or Reschedule
+          </Link>
+        </div>
       </div>
       <div className={styles["split-b-map"]}>
         <Map locations={locations} setLocation={setSelectedLocation} />

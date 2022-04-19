@@ -27,7 +27,7 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
     if (Array.isArray(dependents) && dependents.length === 0) {
       setDependent(null);
     } else {
-      setDependent(undefined)
+      setDependent(undefined);
     }
   }, [dependents]);
 
@@ -143,6 +143,7 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
         message, automated or prerecorded means, even if your telephone number
         is on a state, corporate or national Do Not Call Registry.
       </p>
+      <a className={styles["info-link"]} href="https://danckuts.com/app-privacy">Privacy Policy</a>
       <Checkbox
         value={terms}
         setValue={setTerms}

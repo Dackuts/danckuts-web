@@ -3,26 +3,7 @@ import api from "./index";
 const BASE_URL = "/appointments";
 
 export function getAppointments() {
-  // return api.get(`${BASE_URL}/recent`);
-  return {
-    future: [
-      {
-        id: "31886888-54c1-4291-bc2d-c4bcd7bc2d0c",
-        location: "Irvine",
-        date: "2022-04-19T05:00:00.000Z",
-        type: "hairKut",
-        checkedin: false,
-      },
-      {
-        id: "31886888-54c1-4291-bc2d-c4bcd7bc2d0c",
-        location: "Irvine",
-        date: "2022-04-19T05:00:00.000Z",
-        type: "hairKut",
-        checkedin: false,
-        dependent: 25413
-      },
-    ],
-  };
+  return api.get(`${BASE_URL}/recent`);
 }
 
 export function postCancelAppointment(appointmentId) {
