@@ -112,9 +112,10 @@ export default function AppointmentList({ locations, name, dependents }) {
                 <div>
                   <p className={styles["appointment-info-label"]}>Address:</p>
                   <p className={styles["appointment-info-content"]}>
-                    {keyedLocations[appointments[selectedAppointment].location]
-                      ?.address ??
-                      "23024 Lake Forest Dr #F\nLaguna Hills, CA 92653"}
+                    {
+                      keyedLocations[appointments[selectedAppointment].location]
+                        .address
+                    }
                   </p>
                 </div>
                 <div>

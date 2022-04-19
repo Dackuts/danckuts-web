@@ -8,7 +8,7 @@ export function getAppointments() {
     future: [
       {
         id: "31886888-54c1-4291-bc2d-c4bcd7bc2d0c",
-        location: "Danckuts / Irvine 01",
+        location: "Irvine",
         date: "2022-04-19T05:00:00.000Z",
         type: "hairKut",
         checkedin: false,
