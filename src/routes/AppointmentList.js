@@ -94,19 +94,19 @@ export default function AppointmentList({ locations, name, dependents }) {
                 <div>
                   <p className={styles["appointment-info-label"]}>Customer:</p>
                   <p className={styles["appointment-info-content"]}>
-                    {DateTime.fromISO(
-                      appointments[selectedAppointment].date
-                    ).toFormat("cccc, LL/dd/yy h:mm a")}
-                  </p>
-                </div>
-                <div>
-                  <p className={styles["appointment-info-label"]}>Time:</p>
-                  <p className={styles["appointment-info-content"]}>
                     {appointments?.[selectedAppointment]?.dependent == null
                       ? name
                       : depsById[
                           appointments?.[selectedAppointment]?.dependent
                         ]}
+                  </p>
+                </div>
+                <div>
+                  <p className={styles["appointment-info-label"]}>Time:</p>
+                  <p className={styles["appointment-info-content"]}>
+                    {DateTime.fromISO(
+                      appointments[selectedAppointment].date
+                    ).toFormat("cccc, LL/dd/yy h:mm a")}
                   </p>
                 </div>
                 <div>
