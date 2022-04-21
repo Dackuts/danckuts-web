@@ -31,7 +31,7 @@ export default function AppointmentList({ locations, name, dependents }) {
   const depsById = _keyBy(
     (dependents ?? []).map((d) => ({
       id: d.id,
-      name: `${d.first_name} ${d.last_name}`,
+      name: d.first_name,
     })),
     "id"
   );
@@ -59,7 +59,7 @@ export default function AppointmentList({ locations, name, dependents }) {
                     <p className={styles["appointment-heading"]}>
                       {appointment.dependent != null
                         ? name.split(" ")[0]
-                        : depsById[appointment.dependent].first_name}{" "}
+                        : depsById[appointment.dependent].name}{" "}
                       -{" "}{appointment.location}
                     </p>
                     <p className={styles["appointment-address"]}>

@@ -1,5 +1,14 @@
 .container {
+  box-sizing: border-box;
   padding: 4rem;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.container p {
+  margin: 0.5rem 0;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -75,14 +84,10 @@ input[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
-.form-spacer {
-  height: 6.5rem;
-}
-
 .dependent-selector {
   border: 2px solid var(--border);
   border-radius: 0.4rem;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   padding: 1rem;
   cursor: pointer;
 }
@@ -93,7 +98,26 @@ input[type="submit"]:disabled {
 
 .info-link {
   text-decoration: none;
-  padding-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+.add-dependent-container {
+  border: 2px solid var(--color-primary-300);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 1rem 1rem;
+}
+
+.add-dependent-container:hover {
+  border-color: var(--color-primary-500);
+  background-color: var(--color-primary-300);
+}
+
+.add-dependent-container:hover p {
+  color: var(--background) !important;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -10,8 +10,15 @@ import Spinner from "../components/Spinner";
 import { DateTime } from "luxon";
 import { sleep } from "../utils/time";
 import { useNavigate } from "react-router-dom";
+import Input from "../components/Input";
+import { getMe, postCreateDependent } from "../api/auth";
 
-export default function ScheduleAppointment({ name, dependents, locations }) {
+export default function ScheduleAppointment({
+  name,
+  dependents,
+  setDependents,
+  locations,
+}) {
   const navigate = useNavigate();
   const [terms, setTerms] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
@@ -21,6 +28,9 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
     new URLSearchParams(window.location.search).entries()
   );
   const [dependent, setDependent] = useState(undefined);
+  const [newDependent, setNewDependent] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const keyedLocations = _keyBy(locations, "location");
 
   useEffect(() => {
@@ -70,6 +80,17 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
     wait();
   }, [confirmed, error, navigate]);
 
+  async function handleNewDependent() {
+    setLoading(true);
+    await postCreateDependent(firstName, lastName);
+    const {
+      user: { dependents },
+    } = await getMe();
+    setDependents(dependents);
+    await setNewDependent(false);
+    setLoading(false);
+  }
+
   return loading ? (
     <div className={`${styles["max-height"]} loading-container-full`}>
       <Spinner />
@@ -88,10 +109,31 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
         </p>
       </div>
     )
+  ) : newDependent ? (
+    <div className={styles.container}>
+      <p className={styles.heading}>Select dependent</p>
+      <Input
+        key="firstName"
+        value={firstName}
+        onChange={setFirstName}
+        label="Enter first name"
+      />
+      <Input
+        key="lastName"
+        value={lastName}
+        onChange={setLastName}
+        label="Enter last name"
+      />
+      <div
+        onClick={handleNewDependent}
+        className={styles["add-dependent-container"]}
+      >
+        <p>Add dependent</p>
+      </div>
+    </div>
   ) : dependent === undefined ? (
     <div className={styles.container}>
       <p className={styles.heading}>Select dependent</p>
-      {/* <p>{JSON.stringify(dependents)}</p> */}
       {[
         {
           first_name: name.split(" ")[0],
@@ -110,6 +152,12 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
           </span>
         </div>
       ))}
+      <div
+        onClick={() => setNewDependent(true)}
+        className={styles["add-dependent-container"]}
+      >
+        <p>Add dependent</p>
+      </div>
     </div>
   ) : (
     <div className={styles.container}>
@@ -143,24 +191,30 @@ export default function ScheduleAppointment({ name, dependents, locations }) {
         message, automated or prerecorded means, even if your telephone number
         is on a state, corporate or national Do Not Call Registry.
       </p>
-      <a className={styles["info-link"]} href="https://danckuts.com/app-privacy">Privacy Policy</a>
+      <a
+        className={styles["info-link"]}
+        href="https://danckuts.com/app-privacy"
+      >
+        Privacy Policy
+      </a>
       <Checkbox
         value={terms}
         setValue={setTerms}
         label={"Accept terms"}
         labelRight={true}
       />
-      <div className={styles["form-spacer"]} />
-      <input
-        disabled={!terms}
-        onClick={bookAppointment}
-        type="submit"
-        value={
-          urlParams.rescheduled === "true"
-            ? "Reschedule Appointment"
-            : "Book Appointment"
-        }
-      />
+      <div>
+        <input
+          disabled={!terms}
+          onClick={bookAppointment}
+          type="submit"
+          value={
+            urlParams.rescheduled === "true"
+              ? "Reschedule Appointment"
+              : "Book Appointment"
+          }
+        />
+      </div>
     </div>
   );
 }

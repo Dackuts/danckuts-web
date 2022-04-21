@@ -31,3 +31,7 @@ export async function postCheckPhoneNumber({ phoneNumber }) {
 export function postCreateAccount(user) {
   return api.post(`${BASE_URL}/create`, { ...user });
 }
+
+export function postCreateDependent(firstname, lastname) {
+  return api.post(`${BASE_URL}/create-dependent`, { firstname, lastname });
+}

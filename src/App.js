@@ -58,6 +58,7 @@ export default function App() {
                 <ScheduleAppointment
                   name={name}
                   dependents={dependents}
+                  setDependents={setDependents}
                   locations={locations}
                 />
               </InfoCheck>
