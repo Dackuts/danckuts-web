@@ -10,10 +10,11 @@ export function postCancelAppointment(appointmentId) {
   return api.post(`${BASE_URL}/cancel`, { appointmentId });
 }
 
-export function postCreateAppointment({ location, time }) {
+export function postCreateAppointment({ location, time, dependent = null }) {
   return api.post(`${BASE_URL}/schedule`, {
     location,
     time,
+    ...(dependent != null && { dependent }),
   });
 }
 

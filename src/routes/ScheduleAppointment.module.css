@@ -55,7 +55,7 @@
   color: var(--text-color-2);
 }
 
-.title ~ .title {
+.title~.title {
   border-top: 2px solid var(--background-3);
 }
 
@@ -66,10 +66,11 @@
 input[type="submit"] {
   background-color: var(--color-primary-500);
   border: none;
+  margin-top: 10px;
   padding: 0.75rem 2rem;
   border-radius: 0.25rem;
   cursor: pointer;
-  color: var(--text-color);
+  color: white !important;
   font-size: 1rem;
   font-family: "Exo 2", sans-serif;
 }
@@ -118,6 +119,10 @@ input[type="submit"]:disabled {
 
 .add-dependent-container:hover p {
   color: var(--background) !important;
+}
+
+.error {
+  color: var(--color-danger-500);
 }
 
 @media only screen and (max-width: 1200px) {
