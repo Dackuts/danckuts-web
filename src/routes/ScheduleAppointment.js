@@ -145,7 +145,7 @@ export default function ScheduleAppointment({
         <div
           key={d.id}
           className={styles["dependent-selector"]}
-          onClick={() => setDependent(d)}
+          onClick={() => setDependent({ ...d, name: `${d.first_name} ${d.last_name}` })}
         >
           <span>
             {d.first_name} {d.last_name}
@@ -171,7 +171,7 @@ export default function ScheduleAppointment({
         Please confirm the details below{" "}
         {urlParams.rescheduled === "true" ? "rescheduling" : "booking"} your
         appointment
-        {dependent?.id != null ? ` for ${dependent.first_name}.` : "."}
+        {dependent?.id != null ? <b> for {dependent?.name}.</b> : "."}
       </p>
       <p className={styles.title}>Date:</p>
       <p className={styles.property}>
@@ -215,6 +215,7 @@ export default function ScheduleAppointment({
           }
         />
       </div>
+      <p className={styles.error}>{error?.atlas}</p>
     </div>
   );
 }

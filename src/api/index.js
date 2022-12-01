@@ -22,7 +22,7 @@ api.interceptors.response.use(
     return res.data.payload;
   },
   function (err) {
-    return Promise.reject(err.toJSON());
+    return Promise.reject({ ...err.toJSON(), atlas: err?.response?.data?.payload?.message });
   }
 );
 
