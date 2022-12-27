@@ -76,7 +76,6 @@ export default function App() {
                 setToken={setToken}
               >
                 <AppointmentList
-                  name={name}
                   dependents={dependents}
                   locations={locations}
                 />
