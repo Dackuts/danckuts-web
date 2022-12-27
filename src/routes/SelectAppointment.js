@@ -60,25 +60,24 @@ export default function SelectAppointment({ locations }) {
             </div>
           )}
         </div>
-        {hasCancellable === null ? null :
-          (
-            <>
-              {hasCancellable ? (
-                <div
-                  className={styles["cancel-link-c"]}
-                  onClick={() => navigate("/appointment-list")}
-                >
-                  <p className={styles["cancel-link"]}>
-                    Cancel or Reschedule
-                  </p>
-                </div>
-              ) : (
-                <div className={styles['no-appointments-found']}>
-                  <p>no existing appointments found.</p>
-                </div>
-              )}
-            </>
-          )}
+        {hasCancellable === null ? (
+          <div className="loading-container">
+            <Spinner mode='sm-spinner' />
+          </div>
+        ) : (
+          <>
+            {hasCancellable && (
+              <div
+                className={styles["cancel-link-c"]}
+                onClick={() => navigate("/appointment-list")}
+              >
+                <p className={styles["cancel-link"]}>
+                  Cancel or Reschedule
+                </p>
+              </div>
+            )}
+          </>
+        )}
       </div>
       <div className={styles["split-b-map"]}>
         <Map locations={locations} setLocation={setSelectedLocation} />
