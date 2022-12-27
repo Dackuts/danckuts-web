@@ -1,6 +1,6 @@
 import styles from "./SelectAppointment.module.css";
 import { useState, useEffect } from "react";
-import Spinner, { SmallSpinner } from "../components/Spinner";
+import Spinner from "../components/Spinner";
 import Map from "../components/Map";
 import { useNavigate } from "react-router-dom";
 import TimeSelector from "../components/TimeSelector";
