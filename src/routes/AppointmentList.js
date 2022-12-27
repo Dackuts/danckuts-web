@@ -6,16 +6,20 @@ import { DateTime } from "luxon";
 import TimeSelector from "../components/TimeSelector";
 import { useNavigate } from "react-router-dom";
 import { keyBy as _keyBy } from "lodash";
+import { getMe } from "../api/auth";
 
-export default function AppointmentList({ locations, name, dependents }) {
+export default function AppointmentList({ locations, dependents }) {
   const navigate = useNavigate();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [appointments, setAppointments] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null)
   const [reschedule, setReschedule] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const { future } = await getAppointments();
+      const { user } = await getMe()
+      setCurrentUser(user)
       setAppointments(future);
     }
     fetchData();
@@ -48,17 +52,16 @@ export default function AppointmentList({ locations, name, dependents }) {
               appointments.map((appointment, i) => {
                 return (
                   <div
-                    className={`${styles.appointment} ${
-                      selectedAppointment === i ? [styles.selected] : ""
-                    }`}
+                    className={`${styles.appointment} ${selectedAppointment === i ? [styles.selected] : ""
+                      }`}
                     key={appointment.id}
                     onClick={() => {
                       setSelectedAppointment(i);
                     }}
                   >
                     <p className={styles["appointment-heading"]}>
-                      {appointment.dependent != null
-                        ? name.split(" ")[0]
+                      {!appointment.dependent
+                        ? currentUser.name.split(" ")[0]
                         : depsById[appointment.dependent].name}{" "}
                       -{" "}{appointment.location}
                     </p>
@@ -98,10 +101,10 @@ export default function AppointmentList({ locations, name, dependents }) {
                   <p className={styles["appointment-info-label"]}>Customer:</p>
                   <p className={styles["appointment-info-content"]}>
                     {appointments?.[selectedAppointment]?.dependent == null
-                      ? name
+                      ? currentUser.name
                       : depsById[
-                          appointments?.[selectedAppointment]?.dependent
-                        ]}
+                      appointments?.[selectedAppointment]?.dependent
+                      ]}
                   </p>
                 </div>
                 <div>

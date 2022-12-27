@@ -54,13 +54,13 @@
 }
 
 /* This is hacky as fuck */
-.split-b-map > div:first-child {
+.split-b-map>div:first-child {
   width: 100%;
   height: 100%;
 }
 
 @media only screen and (max-width: 1200px) {
-  .split-b-map > div:first-child {
+  .split-b-map>div:first-child {
     display: none;
   }
 }
@@ -80,7 +80,7 @@
   background-color: var(--color-primary-500);
 }
 
-.location-selected > * {
+.location-selected>* {
   color: var(--background) !important;
 }
 
@@ -122,6 +122,12 @@
   align-items: center;
   justify-content: center;
   margin: 1rem;
+}
+
+.no-appointments-found {
+  color: var(--disabled-text);
+  margin: 0 auto;
+  font-size: small;
 }
 
 .cancel-link-c:hover {
