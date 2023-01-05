@@ -1,18 +1,45 @@
 import styles from "./SelectAppointment.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
 import Map from "../components/Map";
 import { useNavigate } from "react-router-dom";
 import TimeSelector from "../components/TimeSelector";
+import { getMe } from "../api/auth";
 
-export default function SelectAppointment({ locations }) {
+export default function SelectAppointment({ locations, token }) {
   const navigate = useNavigate();
+  const [name, setName] = useState(null);
+  const [loading, setLoading] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const unsetSession = () => {
+    localStorage.removeItem("token");
+    window.location.reload()
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      // eslint-disable-next-line eqeqeq
+      if (!token && !name) {
+        const { user: { name } } = await getMe();
+        setLoading(false);
+        if (name) {
+          setName(name);
+        }
+      }
+    }
+    fetchData();
+  }, [token, name, setName]);
 
   return (
     <div className={styles.split}>
       <div className={styles["split-a"]}>
         <div className={styles["location-container"]}>
+          {!loading && !!name && (
+            <div className={styles["container"]}>
+              <p className={styles['greeting']}><b>Hey {name},</b></p>
+              <button onClick={unsetSession} className={styles['remove-session']}>not you?</button>
+            </div>
+          )}
           <div className={styles["location-header"]}>
             <span>To book an appointment please select a location below</span>
           </div>
