@@ -1,28 +1,13 @@
 import styles from "./SelectAppointment.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Spinner from "../components/Spinner";
 import Map from "../components/Map";
 import { useNavigate } from "react-router-dom";
 import TimeSelector from "../components/TimeSelector";
-import { getAppointments } from "../api/appointments";
 
 export default function SelectAppointment({ locations }) {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [hasCancellable, setHasCancellable] = useState(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      const token = localStorage.getItem("token");
-      if (!!token) {
-        const { future } = await getAppointments();
-        setHasCancellable(future?.length > 0)
-      } else {
-        setHasCancellable(false)
-      }
-    }
-    fetchData();
-  }, []);
 
   return (
     <div className={styles.split}>
@@ -60,24 +45,14 @@ export default function SelectAppointment({ locations }) {
             </div>
           )}
         </div>
-        {hasCancellable === null ? (
-          <div className="loading-container">
-            <Spinner mode='sm-spinner' />
-          </div>
-        ) : (
-          <>
-            {hasCancellable && (
-              <div
-                className={styles["cancel-link-c"]}
-                onClick={() => navigate("/appointment-list")}
-              >
-                <p className={styles["cancel-link"]}>
-                  Cancel or Reschedule
-                </p>
-              </div>
-            )}
-          </>
-        )}
+        <div
+          className={styles["cancel-link-c"]}
+          onClick={() => navigate("/appointment-list")}
+        >
+          <p className={styles["cancel-link"]}>
+            Cancel or Reschedule
+          </p>
+        </div>
       </div>
       <div className={styles["split-b-map"]}>
         <Map locations={locations} setLocation={setSelectedLocation} />
