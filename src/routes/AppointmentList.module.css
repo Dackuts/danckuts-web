@@ -72,7 +72,7 @@
   background-color: var(--color-primary-500);
 }
 
-.appointment.selected > * {
+.appointment.selected>* {
   color: var(--background);
 }
 
@@ -207,6 +207,7 @@
 .appointment-reschedule {
   background-color: var(--color-primary-300);
 }
+
 .appointment-reschedule:hover {
   background-color: var(--color-primary-500);
 }
@@ -214,6 +215,14 @@
 .appointment-cancel {
   background-color: var(--color-danger-300);
 }
+
 .appointment-cancel:hover {
   background-color: var(--color-danger-500);
+}
+
+.no-appts {
+  width: 100%;
+  text-align: center;
+  direction: ltr;
+  color: #6c6767;
 }

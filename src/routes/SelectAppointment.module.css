@@ -139,6 +139,31 @@
   color: var(--background) !important;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3px;
+  margin: 0 0 20px 0;
+}
+
+.remove-session {
+  background-color: transparent;
+  color: var(--color-primary-500);
+  text-decoration: underline;
+  border: none;
+  text-align: left;
+  padding: 0px;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.greeting {
+  font-size: 17px;
+  margin-bottom: 0px;
+}
+
 
 @media only screen and (max-width: 1200px) {
   .scheduler-container {
