@@ -5,7 +5,7 @@
 
 @media only screen and (max-width: 1200px) {
   .split {
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 
@@ -33,7 +33,7 @@
 .cancel-link {
   margin: 0.5rem;
   text-decoration: none;
-  color: var(--color-primary-500);
+  color: var(--color-danger-500);
   font-weight: bold;
 }
 
@@ -115,7 +115,7 @@
 }
 
 .cancel-link-c {
-  border: 2px solid var(--color-primary-300);
+  border: 2px solid var(--color-danger-300);
   border-radius: 0.4rem;
   cursor: pointer;
   display: flex;
@@ -131,8 +131,8 @@
 }
 
 .cancel-link-c:hover {
-  border-color: var(--color-primary-500);
-  background-color: var(--color-primary-300);
+  border-color: var(--color-danger-500);
+  background-color: var(--color-danger-300);
 }
 
 .cancel-link-c:hover .cancel-link {
