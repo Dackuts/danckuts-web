@@ -14,13 +14,27 @@
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .split-a {
+    justify-content: flex-start;
+  }
 }
 
 .location-container {
   margin: 2rem 2rem 0;
   flex-grow: 1;
-  max-height: 70%;
-  overflow-y: scroll;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+  .location-container {
+    max-height: 23.5rem;
+  }
 }
 
 .location-header {
