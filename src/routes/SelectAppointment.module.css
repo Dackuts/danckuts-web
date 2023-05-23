@@ -18,8 +18,10 @@
 }
 
 .location-container {
-  margin: 2rem;
+  margin: 2rem 2rem 0;
   flex-grow: 1;
+  max-height: 70%;
+  overflow-y: scroll;
 }
 
 .location-header {
