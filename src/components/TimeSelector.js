@@ -88,11 +88,9 @@ export default function TimeSelector({
                   }
                 }}
                 key={d.toFormat("EEE")}
-                className={`${styles.date} ${
-                  d.toFormat("yyyy-LL-dd") === selected ? styles.selected : ""
-                } ${d < DateTime.now().startOf("day") ? styles.disabled : ""} ${
-                  d.toFormat("yyyy-LL-dd") === selected ? styles.selected : ""
-                }`}
+                className={`${styles.date} ${d.toFormat("yyyy-LL-dd") === selected ? styles.selected : ""
+                  } ${d < DateTime.now().startOf("day") ? styles.disabled : ""} ${d.toFormat("yyyy-LL-dd") === selected ? styles.selected : ""
+                  }`}
               >
                 <span className="noselect">{d.toFormat("d")}</span>
               </div>
@@ -104,30 +102,37 @@ export default function TimeSelector({
         </svg>
       </div>
       {loading ||
-      availability?.dates == null ||
-      availability?.dates[selected] == null ? (
+        availability?.dates == null ||
+        availability?.dates[selected] == null ? (
         <div className="loading-container">
           <Spinner />
         </div>
       ) : (
         <div className={styles["time-text-container"]}>
-          {availability.dates[selected].map((d, i) => {
-            return (
-              <p
-                onClick={() =>
-                  navigate(
-                    `/schedule?time=${d}&rescheduled=${
-                      reschedule ? appointmentId : false
-                    }&location=${location}`
-                  )
-                }
-                className={styles["time-text"]}
-                key={i}
-              >
-                {DateTime.fromISO(d).toFormat("hh : mm a")}
-              </p>
-            );
-          })}
+          {availability.dates[selected].length > 0 ? (
+            <>
+              {availability.dates[selected].map((d, i) => {
+                return (
+                  <p
+                    onClick={() =>
+                      navigate(
+                        `/schedule?time=${d}&rescheduled=${reschedule ? appointmentId : false
+                        }&location=${location}`
+                      )
+                    }
+                    className={styles["time-text"]}
+                    key={i}
+                  >
+                    {DateTime.fromISO(d).toFormat("hh : mm a")}
+                  </p>
+                );
+              })}
+            </>
+          ) : (
+            <div className={styles["no-time-text"]}>
+              <p>No appointments available on this day. Select another day.</p>
+            </div>
+          )}
         </div>
       )}
     </div>
