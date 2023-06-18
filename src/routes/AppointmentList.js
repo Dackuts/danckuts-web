@@ -12,14 +12,14 @@ export default function AppointmentList({ locations, dependents }) {
   const navigate = useNavigate();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [appointments, setAppointments] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
   const [reschedule, setReschedule] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const { future } = await getAppointments();
-      const { user } = await getMe()
-      setCurrentUser(user)
+      const { user } = await getMe();
+      setCurrentUser(user);
       setAppointments(future);
     }
     fetchData();
@@ -49,30 +49,37 @@ export default function AppointmentList({ locations, dependents }) {
           </div>
           <div className={styles["appointment-scroll"]}>
             {appointments != null ? (
-              appointments.map((appointment, i) => {
-                return (
-                  <div
-                    className={`${styles.appointment} ${selectedAppointment === i ? [styles.selected] : ""
+              appointments.length > 0 ? (
+                appointments.map((appointment, i) => {
+                  return (
+                    <div
+                      className={`${styles.appointment} ${
+                        selectedAppointment === i ? [styles.selected] : ""
                       }`}
-                    key={appointment.id}
-                    onClick={() => {
-                      setSelectedAppointment(i);
-                    }}
-                  >
-                    <p className={styles["appointment-heading"]}>
-                      {!appointment.dependent
-                        ? currentUser.name.split(" ")[0]
-                        : depsById[appointment.dependent].name}{" "}
-                      -{" "}{appointment.location}
-                    </p>
-                    <p className={styles["appointment-address"]}>
-                      {DateTime.fromISO(appointment.date).toFormat(
-                        "cccc, LL/dd/yy h:mm a"
-                      )}
-                    </p>
-                  </div>
-                );
-              })
+                      key={appointment.id}
+                      onClick={() => {
+                        setSelectedAppointment(i);
+                      }}
+                    >
+                      <p className={styles["appointment-heading"]}>
+                        {!appointment.dependent
+                          ? currentUser.name.split(" ")[0]
+                          : depsById[appointment.dependent].name}{" "}
+                        - {appointment.location}
+                      </p>
+                      <p className={styles["appointment-address"]}>
+                        {DateTime.fromISO(appointment.date).toFormat(
+                          "cccc, LL/dd/yy h:mm a"
+                        )}
+                      </p>
+                    </div>
+                  );
+                })
+              ) : (
+                <p className={styles["no-appts"]}>
+                  You have no scheduled appointments.
+                </p>
+              )
             ) : (
               <div className="loading-container">
                 <Spinner />
@@ -102,9 +109,8 @@ export default function AppointmentList({ locations, dependents }) {
                   <p className={styles["appointment-info-content"]}>
                     {appointments?.[selectedAppointment]?.dependent == null
                       ? currentUser.name
-                      : depsById[
-                      appointments?.[selectedAppointment]?.dependent
-                      ]}
+                      : depsById[appointments?.[selectedAppointment]?.dependent]
+                          .name}
                   </p>
                 </div>
                 <div>

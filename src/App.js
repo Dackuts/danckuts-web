@@ -42,7 +42,7 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={<SelectAppointment locations={locations} />}
+            element={<SelectAppointment locations={locations} token={token} />}
           />
           <Route
             path="/schedule"

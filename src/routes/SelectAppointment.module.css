@@ -5,7 +5,7 @@
 
 @media only screen and (max-width: 1200px) {
   .split {
-    min-height: 100vh;
+    min-height: 100dvh;
   }
 }
 
@@ -17,9 +17,24 @@
   justify-content: space-between;
 }
 
+
+@media only screen and (max-width: 1200px) {
+  .split-a {
+    justify-content: flex-start;
+  }
+}
+
 .location-container {
-  margin: 2rem;
+  margin: 2rem 2rem 0;
   flex-grow: 1;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+  .location-container {
+    max-height: 23.5rem;
+  }
 }
 
 .location-header {
@@ -33,7 +48,7 @@
 .cancel-link {
   margin: 0.5rem;
   text-decoration: none;
-  color: var(--color-primary-500);
+  color: var(--color-danger-500);
   font-weight: bold;
 }
 
@@ -115,7 +130,7 @@
 }
 
 .cancel-link-c {
-  border: 2px solid var(--color-primary-300);
+  border: 2px solid var(--color-danger-300);
   border-radius: 0.4rem;
   cursor: pointer;
   display: flex;
@@ -131,12 +146,37 @@
 }
 
 .cancel-link-c:hover {
-  border-color: var(--color-primary-500);
-  background-color: var(--color-primary-300);
+  border-color: var(--color-danger-500);
+  background-color: var(--color-danger-300);
 }
 
 .cancel-link-c:hover .cancel-link {
   color: var(--background) !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3px;
+  margin: 0 0 20px 0;
+}
+
+.remove-session {
+  background-color: transparent;
+  color: var(--color-primary-500);
+  text-decoration: underline;
+  border: none;
+  text-align: left;
+  padding: 0px;
+  font-style: italic;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.greeting {
+  font-size: 17px;
+  margin-bottom: 0px;
 }
 
 
