@@ -18,11 +18,11 @@
 }
 
 
-@media only screen and (max-width: 1200px) {
+/* @media only screen and (max-width: 1200px) {
   .split-a {
     justify-content: flex-start;
   }
-}
+} */
 
 .location-container {
   margin: 2rem 2rem 0;
@@ -31,11 +31,11 @@
   overflow-y: auto;
 }
 
-@media only screen and (max-width: 1200px) {
+/* @media only screen and (max-width: 1200px) {
   .location-container {
     max-height: 23.5rem;
   }
-}
+} */
 
 .location-header {
   background-color: var(--background-3);
