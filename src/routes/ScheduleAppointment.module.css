@@ -130,3 +130,17 @@ input[type="submit"]:disabled {
     height: 100vh;
   }
 }
+
+.refresh {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary-700);
+  font-size: 1rem;
+  font-family: "Exo 2", sans-serif;
+  width: fit-content;
+}
+
+.refresh:hover {
+  text-decoration: underline;
+}

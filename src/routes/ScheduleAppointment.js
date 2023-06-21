@@ -215,7 +215,16 @@ export default function ScheduleAppointment({
           }
         />
       </div>
-      <p className={styles.error}>{error?.atlas}</p>
+      {!!error?.atlas && (
+        <>
+          <p className={styles.error}>{error?.atlas}</p>
+          <button
+            className={styles.refresh}
+            onClick={() => window.location.replace('/')}
+            type="button"
+          >&larr; Find another time</button>
+        </>
+      )}
     </div>
   );
 }
