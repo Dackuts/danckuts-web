@@ -107,6 +107,7 @@ function SetPhone({ nextStep }) {
         label="Enter your mobile number"
       />
       <input onClick={() => nextStep(phone)} type="submit" value="Submit" />
+      <p className='hint-text'>Trouble logging in? Call (949) 392-3422</p>
     </div>
   );
 }
@@ -131,6 +132,7 @@ function SetCode({ nextStep }) {
         type="submit"
         value="Submit"
       />
+      <p className='hint-text'>Trouble logging in? Call (949) 392-3422</p>
     </div>
   );
 }

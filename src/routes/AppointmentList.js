@@ -53,9 +53,8 @@ export default function AppointmentList({ locations, dependents }) {
                 appointments.map((appointment, i) => {
                   return (
                     <div
-                      className={`${styles.appointment} ${
-                        selectedAppointment === i ? [styles.selected] : ""
-                      }`}
+                      className={`${styles.appointment} ${selectedAppointment === i ? [styles.selected] : ""
+                        }`}
                       key={appointment.id}
                       onClick={() => {
                         setSelectedAppointment(i);
@@ -110,7 +109,7 @@ export default function AppointmentList({ locations, dependents }) {
                     {appointments?.[selectedAppointment]?.dependent == null
                       ? currentUser.name
                       : depsById[appointments?.[selectedAppointment]?.dependent]
-                          .name}
+                        .name}
                   </p>
                 </div>
                 <div>
