@@ -34,14 +34,6 @@ export default function ScheduleAppointment({
   const keyedLocations = _keyBy(locations, "location");
 
   useEffect(() => {
-    if (Array.isArray(dependents) && dependents.length === 0) {
-      setDependent(null);
-    } else {
-      setDependent(undefined);
-    }
-  }, [dependents]);
-
-  useEffect(() => {
     setLoading(locations == null);
   }, [locations]);
 
