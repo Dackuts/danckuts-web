@@ -68,11 +68,9 @@ export default function ScheduleAppointment({
 				try {
 				} catch (error) {
 					const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
-					navigate(
-						`https://danckuts.com/booking-confirmation?utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}}`
-					);
+					window.location.href = `https://danckuts.com/booking-confirmation?utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}}`;
 				} finally {
-					navigate("https://danckuts.com/booking-confirmation");
+					window.location.href = "https://danckuts.com/booking-confirmation";
 				}
 			}
 		}
