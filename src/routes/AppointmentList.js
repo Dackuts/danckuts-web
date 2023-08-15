@@ -14,6 +14,7 @@ export default function AppointmentList({ locations, dependents }) {
   const [appointments, setAppointments] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [reschedule, setReschedule] = useState(false);
+  const [cancelPopup, setCancelPopup] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -27,7 +28,7 @@ export default function AppointmentList({ locations, dependents }) {
 
   function cancelAppointment() {
     postCancelAppointment(appointments[selectedAppointment].id);
-    navigate("../");
+    navigate("../?cancel=true");
   }
 
   const keyedLocations = _keyBy(locations, "location");
@@ -45,7 +46,13 @@ export default function AppointmentList({ locations, dependents }) {
       <div className={styles["split-a"]}>
         <div className={styles["appointment-container"]}>
           <div className={styles["appointment-header"]}>
-            <span>Select one of your existing appointments</span>
+            {/* <span>Select one of your existing appointments</span> */}
+            <span className={styles.heading}>
+              AYE AYE CAPTAIN 🫡
+            </span>
+            <span>
+              Which appointmentiswalking the plank?
+            </span>
           </div>
           <div className={styles["appointment-scroll"]}>
             {appointments != null ? (
@@ -67,9 +74,17 @@ export default function AppointmentList({ locations, dependents }) {
                         - {appointment.location}
                       </p>
                       <p className={styles["appointment-address"]}>
-                        {DateTime.fromISO(appointment.date).toFormat(
-                          "cccc, LL/dd/yy h:mm a"
-                        )}
+                        {DateTime.fromISO(
+                          appointment.date
+                        ).toFormat("cccc, ")}
+                        <span className="number">
+                          {DateTime.fromISO(
+                            appointment.date
+                          ).toFormat("LL/dd/yy h:mm ")}
+                        </span>
+                        {DateTime.fromISO(
+                          appointment.date
+                        ).toFormat("a")}
                       </p>
                     </div>
                   );
@@ -117,7 +132,15 @@ export default function AppointmentList({ locations, dependents }) {
                   <p className={styles["appointment-info-content"]}>
                     {DateTime.fromISO(
                       appointments[selectedAppointment].date
-                    ).toFormat("cccc, LL/dd/yy h:mm a")}
+                    ).toFormat("cccc, ")}
+                    <span className="number">
+                      {DateTime.fromISO(
+                        appointments[selectedAppointment].date
+                      ).toFormat("LL/dd/yy h:mm ")}
+                    </span>
+                    {DateTime.fromISO(
+                      appointments[selectedAppointment].date
+                    ).toFormat("a")}
                   </p>
                 </div>
                 <div>
@@ -133,7 +156,7 @@ export default function AppointmentList({ locations, dependents }) {
                   <p className={styles["appointment-info-label"]}>
                     Shop Phone Number:
                   </p>
-                  <p className={styles["appointment-info-content"]}>
+                  <p className={`${styles["appointment-info-content"]} number`}>
                     {
                       keyedLocations[appointments[selectedAppointment].location]
                         .phone

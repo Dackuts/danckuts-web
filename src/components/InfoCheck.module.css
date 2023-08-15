@@ -1,18 +1,65 @@
 .container {
   padding: 4rem;
+  position: relative;
+}
+
+.centerContainer {
+  padding: 0 4rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
 }
 
 .heading {
   font-size: 2rem;
-  font-weight: 700;
   color: var(--color-primary-500);
   margin: 0.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
 }
+
+.popup {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  padding: 1rem;
+  top: 0;
+  left: auto;
+  right: auto;
+  text-align: center;
+  border: solid 2px var(--color-primary-500);
+  border-radius: 2rem;
+  left: 0;
+}
+
+.x {
+  color: red;
+  float: right;
+  cursor: pointer;
+}
+
+.redLink {
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.redText {
+  color: red;
+}
+
+.inputText {
+  margin: -15px 0 10px;
+}
+
 input[type="submit"] {
   background-color: var(--color-primary-500);
   border: none;
   padding: 0.75rem 2rem;
-  border-radius: 0.25rem;
+  border-radius: 999999px;
   cursor: pointer;
   color: var(--text-color);
   font-size: 1rem;
@@ -27,4 +74,14 @@ input[type="submit"]:disabled {
   background-color: var(--color-primary-300) !important;
   color: var(--disabled-text) !important;
   cursor: not-allowed;
+}
+
+.ghostButton {
+  margin-top: 1rem;
+  border: solid 2px var(--color-primary-500);
+  border-radius: 2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: white;
+  display: block;
 }

@@ -1,6 +1,37 @@
+.popup {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  padding: 6rem 1rem;
+  top: 0;
+  left: auto;
+  right: auto;
+  text-align: center;
+  border: solid 2px red;
+  border-radius: 2rem;
+  margin: 3rem;
+  right: 0;
+  left: 0;
+}
+
+.x {
+  top: 1rem;
+  right: 1rem;
+  position: absolute;
+  color: red;
+  float: right;
+  cursor: pointer;
+}
+
+.redText {
+  color: red;
+  font-size: 2rem;
+}
+
 .split {
   display: flex;
   height: 100%;
+  position: relative;
 }
 
 @media only screen and (max-width: 1200px) {

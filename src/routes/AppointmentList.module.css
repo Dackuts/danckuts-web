@@ -17,6 +17,14 @@
   overflow: hidden;
 }
 
+.heading {
+  font-size: 1.25rem;
+  color: var(--color-primary-500);
+  text-align: center;
+  margin: 0.5rem 0;
+  text-transform: uppercase;
+}
+
 .appointment-scroll {
   direction: rtl;
   overflow-y: auto;
@@ -24,11 +32,11 @@
 }
 
 .appointment-header {
-  background-color: var(--background-3);
   height: 6rem;
   display: flex;
   align-items: center;
   padding: 0 1rem;
+  flex-direction: column;
 }
 
 .cancel-link {

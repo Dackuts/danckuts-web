@@ -5,10 +5,28 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .container p {
   margin: 0.5rem 0;
+}
+
+.redLink {
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.blueLink {
+  color: var(--color-primary-500);
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: center;
+}
+
+.centerText {
+  text-align: center;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -19,9 +37,10 @@
 
 .heading {
   font-size: 2rem;
-  font-weight: 700;
   color: var(--color-primary-500);
+  text-align: center;
   margin: 0.5rem 0;
+  text-transform: uppercase;
 }
 
 .center-container {
@@ -29,6 +48,21 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+
+.popup {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  padding: 1rem;
+  top: 0;
+  left: auto;
+  right: auto;
+  text-align: center;
+  border: solid 2px var(--color-primary-500);
+  border-radius: 2rem;
+  left: 0;
 }
 
 .heading-center {
@@ -55,7 +89,32 @@
   color: var(--text-color-2);
 }
 
-.title~.title {
+.appointmentContainer {
+  background-color: white;
+  border: solid 2px var(--color-primary-500);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: min-content;
+  align-items: center;
+  margin: 1rem auto;
+  gap: 0.5rem
+}
+
+.appointmentContainerWeekday {
+  background-color: var(--color-primary-500);
+  border-radius: 2rem;
+  padding: 0 0.5rem;
+  color: white;
+}
+
+.appointmentContainerTime {
+  text-decoration: underline;
+}
+
+.seperator {
+  width: 100%;
   border-top: 2px solid var(--background-3);
 }
 
@@ -85,40 +144,41 @@ input[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
-.dependent-selector {
-  border: 2px solid var(--border);
-  border-radius: 0.4rem;
-  margin: 0.5rem 0;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.dependent-selector:hover {
-  border-color: var(--color-primary-500);
-}
-
 .info-link {
   text-decoration: none;
   margin-bottom: 1rem;
 }
 
-.add-dependent-container {
+.dependent-container {
   border: 2px solid var(--color-primary-300);
   border-radius: 0.4rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
   margin: 2rem 1rem 1rem;
 }
 
-.add-dependent-container:hover {
+.dependent-container:hover {
   border-color: var(--color-primary-500);
   background-color: var(--color-primary-300);
 }
 
-.add-dependent-container:hover p {
+.dependent-container:hover p {
   color: var(--background) !important;
+}
+
+.add-dependent-button {
+  background-color: var(--color-primary-500);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 999999px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  font-family: "Exo 2", sans-serif;
+  width: fit-content;
 }
 
 .error {

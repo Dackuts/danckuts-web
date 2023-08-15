@@ -109,29 +109,31 @@ export default function ScheduleAppointment({
 		)
 	) : newDependent ? (
 		<div className={styles.container}>
-			<p className={styles.heading}>Select dependent</p>
+			<p className={styles.heading}>ADD A DEPENDENT BELOW</p>
+			<p>No way dude. no kids for me to add! Take me back... <span className={styles.redLink} onClick={() => setNewDependent(false)}>click here</span> </p>
 			<Input
 				key="firstName"
 				value={firstName}
 				onChange={setFirstName}
-				label="Enter first name"
+				label="First name"
 			/>
 			<Input
 				key="lastName"
 				value={lastName}
 				onChange={setLastName}
-				label="Enter last name"
+				label="Last name"
 			/>
-			<div
+			<span
 				onClick={handleNewDependent}
-				className={styles["add-dependent-container"]}
+				className={styles["add-dependent-button"]}
 			>
-				<p>Add dependent</p>
-			</div>
+				Submit
+			</span>
 		</div>
 	) : dependent === undefined ? (
 		<div className={styles.container}>
-			<p className={styles.heading}>Select dependent</p>
+			<p className={styles.heading}>NEW APPOINTMENT, WHO THIS!?</p>
+			<p>Select who this appointment is for 👇</p>
 			{[
 				{
 					first_name: name.split(" ")[0],
@@ -142,7 +144,7 @@ export default function ScheduleAppointment({
 			].map((d) => (
 				<div
 					key={d.id}
-					className={styles["dependent-selector"]}
+					className={styles["dependent-container"]}
 					onClick={() =>
 						setDependent({ ...d, name: `${d.first_name} ${d.last_name}` })
 					}
@@ -152,44 +154,35 @@ export default function ScheduleAppointment({
 					</span>
 				</div>
 			))}
-			<div
+			<span
+				className={styles.blueLink}
 				onClick={() => setNewDependent(true)}
-				className={styles["add-dependent-container"]}
 			>
-				<p>Add dependent</p>
-			</div>
+				+ ADD your kid(s) under your mobile number
+				Click here
+			</span>
+			<span className={styles.centerText}>You can book them after you add them</span>
 		</div>
 	) : (
 		<div className={styles.container}>
 			<p className={styles.heading}>
-				Confirm {urlParams.rescheduled === "true" ? "Rescheduling" : "Booking"}
+				LET’S MAKE IT OFFICIAL
 			</p>
-			<p>
-				Hello <span className={styles.name}>{name}</span>,
+			<p className={styles.heading}>
+				{dependent?.id != null ? dependent?.name : name}
 			</p>
-			<p className={styles.info}>
-				Please confirm the details below{" "}
-				{urlParams.rescheduled === "true" ? "rescheduling" : "booking"} your
-				appointment
-				{dependent?.id != null ? <b> for {dependent?.name}.</b> : "."}
-			</p>
-			<p className={styles.title}>Date:</p>
-			<p className={styles.property}>
-				{DateTime.fromISO(urlParams.time).toFormat("cccc, LL/dd/yy h:mm a")}
-			</p>
-			<p className={styles.title}>Location:</p>
-			<p className={styles.property}>
-				{keyedLocations[urlParams.location].address}
-			</p>
+			<div className={styles.appointmentContainer}>
+				<span className={styles.appointmentContainerWeekday}>{DateTime.fromISO(urlParams.time).toFormat("cccc")}</span>
+				<span>{DateTime.fromISO(urlParams.time).toFormat("LLLL d")}</span>
+				<span className={styles.appointmentContainerTime}>{DateTime.fromISO(urlParams.time).toFormat("h:mm a")}</span>
+			</div>
+			<div className={styles.seperator}></div>
 			<p className={styles.info}>
 				By providing information and clicking on{" "}
 				{urlParams.rescheduled === "true"
 					? "Reschedule Appointment"
 					: "Book Appointment"}{" "}
-				below you agree to our Privacy Policy and are expressly consenting for
-				us to contact you by telephone, mobile device, email and including text
-				message, automated or prerecorded means, even if your telephone number
-				is on a state, corporate or national Do Not Call Registry.
+				below you agree to our Privacy Policy.
 			</p>
 			<a
 				className={styles["info-link"]}
@@ -216,7 +209,7 @@ export default function ScheduleAppointment({
 				/>
 			</div>
 			{!!error?.atlas && (
-				<>
+				<div className={styles.popup} >
 					<p className={styles.error}>{error?.atlas}</p>
 					<button
 						className={styles.refresh}
@@ -225,7 +218,7 @@ export default function ScheduleAppointment({
 					>
 						&larr; Find another time
 					</button>
-				</>
+				</div>
 			)}
 		</div>
 	);

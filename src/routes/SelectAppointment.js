@@ -11,6 +11,7 @@ export default function SelectAppointment({ locations, token }) {
   const [name, setName] = useState(null);
   const [loading, setLoading] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [cancelPopup, setCancelPopup] = useState(new URLSearchParams(window.location.search).get("cancel") == 'true' ?? false)
   const unsetSession = () => {
     localStorage.removeItem("token");
     window.location.reload()
@@ -32,6 +33,13 @@ export default function SelectAppointment({ locations, token }) {
 
   return (
     <div className={styles.split}>
+      {cancelPopup ? (
+        <div className={styles.popup}>
+          <div className={styles.x} onClick={() => setCancelPopup(false)}>✖</div>
+          <p className={styles.redText}>YOUR APPOINTMENT HAS BEEN CANCELED</p>
+          <p>Don't cheat on us. We'll know!</p>
+        </div>
+      ) : null}
       <div className={styles["split-a"]}>
         <div className={styles["location-container"]}>
           {!loading && !!name && (

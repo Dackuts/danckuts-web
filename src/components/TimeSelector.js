@@ -92,7 +92,7 @@ export default function TimeSelector({
                   } ${d < DateTime.now().startOf("day") ? styles.disabled : ""} ${d.toFormat("yyyy-LL-dd") === selected ? styles.selected : ""
                   }`}
               >
-                <span className="noselect">{d.toFormat("d")}</span>
+                <span className="noselect number">{d.toFormat("d")}</span>
               </div>
             ))}
           </div>
@@ -120,7 +120,7 @@ export default function TimeSelector({
                         }&location=${location}`
                       )
                     }
-                    className={styles["time-text"]}
+                    className={`number ${styles["time-text"]}`}
                     key={i}
                   >
                     {DateTime.fromISO(d).toFormat("hh : mm a")}
