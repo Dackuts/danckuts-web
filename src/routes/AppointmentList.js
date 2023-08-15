@@ -14,7 +14,6 @@ export default function AppointmentList({ locations, dependents }) {
   const [appointments, setAppointments] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [reschedule, setReschedule] = useState(false);
-  const [cancelPopup, setCancelPopup] = useState(false);
 
   useEffect(() => {
     async function fetchData() {

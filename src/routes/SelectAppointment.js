@@ -11,7 +11,7 @@ export default function SelectAppointment({ locations, token }) {
   const [name, setName] = useState(null);
   const [loading, setLoading] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [cancelPopup, setCancelPopup] = useState(new URLSearchParams(window.location.search).get("cancel") == 'true' ?? false)
+  const [cancelPopup, setCancelPopup] = useState(new URLSearchParams(window.location.search).get("cancel") === 'true' ?? false)
   const unsetSession = () => {
     localStorage.removeItem("token");
     window.location.reload()

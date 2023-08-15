@@ -31,7 +31,6 @@ export default function ScheduleAppointment({
 	const [newDependent, setNewDependent] = useState(false);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const keyedLocations = _keyBy(locations, "location");
 
 	useEffect(() => {
 		setLoading(locations == null);
