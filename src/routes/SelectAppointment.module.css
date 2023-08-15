@@ -36,7 +36,7 @@
 
 @media only screen and (max-width: 1200px) {
   .split {
-    min-height: 100dvh;
+    min-height: calc(100dvh - 120px);
   }
 }
 
