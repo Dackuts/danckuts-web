@@ -1,5 +1,4 @@
 import styles from "./ScheduleAppointment.module.css";
-import { keyBy as _keyBy } from "lodash";
 import { useState, useEffect } from "react";
 import Checkbox from "../components/Checkbox";
 import {
