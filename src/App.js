@@ -100,10 +100,6 @@ export default function App() {
 					/>
 				</Routes>
 			</Router>
-			<div className={styles.troubleContainer}>
-				<span>HAVING TROUBLE!? WE GOT YOU</span>
-				<a className={styles.blueLink} href="tel:+19493923422">CLICK HERE TO CALL US</a>
-			</div>
 		</main>
 	);
 }

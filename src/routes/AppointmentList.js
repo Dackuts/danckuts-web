@@ -41,153 +41,159 @@ export default function AppointmentList({ locations, dependents }) {
   );
 
   return (
-    <div className={styles.split}>
-      <div className={styles["split-a"]}>
-        <div className={styles["appointment-container"]}>
-          <div className={styles["appointment-header"]}>
-            {/* <span>Select one of your existing appointments</span> */}
-            <span className={styles.heading}>
-              AYE AYE CAPTAIN 🫡
-            </span>
-            <span>
-              Which appointmentiswalking the plank?
-            </span>
-          </div>
-          <div className={styles["appointment-scroll"]}>
-            {appointments != null ? (
-              appointments.length > 0 ? (
-                appointments.map((appointment, i) => {
-                  return (
-                    <div
-                      className={`${styles.appointment} ${selectedAppointment === i ? [styles.selected] : ""
-                        }`}
-                      key={appointment.id}
-                      onClick={() => {
-                        setSelectedAppointment(i);
-                      }}
-                    >
-                      <p className={styles["appointment-heading"]}>
-                        {!appointment.dependent
-                          ? currentUser.name.split(" ")[0]
-                          : depsById[appointment.dependent].name}{" "}
-                        - {appointment.location}
-                      </p>
-                      <p className={styles["appointment-address"]}>
-                        {DateTime.fromISO(
-                          appointment.date
-                        ).toFormat("cccc, ")}
-                        <span className="number">
+    <>
+      <div className={styles.split}>
+        <div className={styles["split-a"]}>
+          <div className={styles["appointment-container"]}>
+            <div className={styles["appointment-header"]}>
+              {/* <span>Select one of your existing appointments</span> */}
+              <span className={styles.heading}>
+                You got it 🫡
+              </span>
+              <span>
+                Select an appointment to modify
+              </span>
+            </div>
+            <div className={styles["appointment-scroll"]}>
+              {appointments != null ? (
+                appointments.length > 0 ? (
+                  appointments.map((appointment, i) => {
+                    return (
+                      <div
+                        className={`${styles.appointment} ${selectedAppointment === i ? [styles.selected] : ""
+                          }`}
+                        key={appointment.id}
+                        onClick={() => {
+                          setSelectedAppointment(i);
+                        }}
+                      >
+                        <p className={styles["appointment-heading"]}>
+                          {!appointment.dependent
+                            ? currentUser.name.split(" ")[0]
+                            : depsById[appointment.dependent].name}{" "}
+                          - {appointment.location}
+                        </p>
+                        <p className={styles["appointment-address"]}>
                           {DateTime.fromISO(
                             appointment.date
-                          ).toFormat("LL/dd/yy h:mm ")}
-                        </span>
-                        {DateTime.fromISO(
-                          appointment.date
-                        ).toFormat("a")}
-                      </p>
-                    </div>
-                  );
-                })
+                          ).toFormat("cccc, ")}
+                          <span className="number">
+                            {DateTime.fromISO(
+                              appointment.date
+                            ).toFormat("LL/dd/yy h:mm ")}
+                          </span>
+                          {DateTime.fromISO(
+                            appointment.date
+                          ).toFormat("a")}
+                        </p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p className={styles["no-appts"]}>
+                    You have no scheduled appointments.
+                  </p>
+                )
               ) : (
-                <p className={styles["no-appts"]}>
-                  You have no scheduled appointments.
-                </p>
-              )
-            ) : (
-              <div className="loading-container">
-                <Spinner />
-              </div>
-            )}
+                <div className="loading-container">
+                  <Spinner />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      <div className={styles["split-b"]}>
-        {selectedAppointment != null ? (
-          reschedule ? (
-            <div className={`${styles["scheduler-container"]} card`}>
-              <TimeSelector
-                location={appointments[selectedAppointment].location}
-                reschedule={true}
-                appointmentId={appointments[selectedAppointment].id}
-              />
-            </div>
-          ) : (
-            <div className={styles["appointment-info-container"]}>
-              <div className={styles["appointment-info"]}>
-                <p className={styles["appointment-heading"]}>
-                  {appointments[selectedAppointment].location}
-                </p>
-                <div>
-                  <p className={styles["appointment-info-label"]}>Customer:</p>
-                  <p className={styles["appointment-info-content"]}>
-                    {appointments?.[selectedAppointment]?.dependent == null
-                      ? currentUser.name
-                      : depsById[appointments?.[selectedAppointment]?.dependent]
-                        .name}
+        <div className={styles["split-b"]}>
+          {selectedAppointment != null ? (
+            reschedule ? (
+              <div className={`${styles["scheduler-container"]} card`}>
+                <TimeSelector
+                  location={appointments[selectedAppointment].location}
+                  reschedule={true}
+                  appointmentId={appointments[selectedAppointment].id}
+                />
+              </div>
+            ) : (
+              <div className={styles["appointment-info-container"]}>
+                <div className={styles["appointment-info"]}>
+                  <p className={styles["appointment-heading"]}>
+                    {appointments[selectedAppointment].location}
                   </p>
-                </div>
-                <div>
-                  <p className={styles["appointment-info-label"]}>Time:</p>
-                  <p className={styles["appointment-info-content"]}>
-                    {DateTime.fromISO(
-                      appointments[selectedAppointment].date
-                    ).toFormat("cccc, ")}
-                    <span className="number">
+                  <div>
+                    <p className={styles["appointment-info-label"]}>Customer:</p>
+                    <p className={styles["appointment-info-content"]}>
+                      {appointments?.[selectedAppointment]?.dependent == null
+                        ? currentUser.name
+                        : depsById[appointments?.[selectedAppointment]?.dependent]
+                          .name}
+                    </p>
+                  </div>
+                  <div>
+                    <p className={styles["appointment-info-label"]}>Time:</p>
+                    <p className={styles["appointment-info-content"]}>
                       {DateTime.fromISO(
                         appointments[selectedAppointment].date
-                      ).toFormat("LL/dd/yy h:mm ")}
-                    </span>
-                    {DateTime.fromISO(
-                      appointments[selectedAppointment].date
-                    ).toFormat("a")}
-                  </p>
-                </div>
-                <div>
-                  <p className={styles["appointment-info-label"]}>Address:</p>
-                  <p className={styles["appointment-info-content"]}>
-                    {
-                      keyedLocations[appointments[selectedAppointment].location]
-                        .address
-                    }
-                  </p>
-                </div>
-                <div>
-                  <p className={styles["appointment-info-label"]}>
-                    Shop Phone Number:
-                  </p>
-                  <p className={`${styles["appointment-info-content"]} number`}>
-                    {
-                      keyedLocations[appointments[selectedAppointment].location]
-                        .phone
-                    }
-                  </p>
-                </div>
-                <div className={styles["button-container"]}>
-                  <button
-                    onClick={() => setReschedule(true)}
-                    className={`${styles.button} ${styles["appointment-reschedule"]}`}
-                  >
-                    Reschedule
-                  </button>
-                  <button
-                    onClick={cancelAppointment}
-                    className={`${styles.button} ${styles["appointment-cancel"]}`}
-                  >
-                    Cancel
-                  </button>
+                      ).toFormat("cccc, ")}
+                      <span className="number">
+                        {DateTime.fromISO(
+                          appointments[selectedAppointment].date
+                        ).toFormat("LL/dd/yy h:mm ")}
+                      </span>
+                      {DateTime.fromISO(
+                        appointments[selectedAppointment].date
+                      ).toFormat("a")}
+                    </p>
+                  </div>
+                  <div>
+                    <p className={styles["appointment-info-label"]}>Address:</p>
+                    <p className={styles["appointment-info-content"]}>
+                      {
+                        keyedLocations[appointments[selectedAppointment].location]
+                          .address
+                      }
+                    </p>
+                  </div>
+                  <div>
+                    <p className={styles["appointment-info-label"]}>
+                      Shop Phone Number:
+                    </p>
+                    <p className={`${styles["appointment-info-content"]} number`}>
+                      {
+                        keyedLocations[appointments[selectedAppointment].location]
+                          .phone
+                      }
+                    </p>
+                  </div>
+                  <div className={styles["button-container"]}>
+                    <button
+                      onClick={() => setReschedule(true)}
+                      className={`${styles.button} ${styles["appointment-reschedule"]}`}
+                    >
+                      Reschedule
+                    </button>
+                    <button
+                      onClick={cancelAppointment}
+                      className={`${styles.button} ${styles["appointment-cancel"]}`}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
+            )
+          ) : (
+            <div
+              className={`${styles["appointment-info-container"]} ${styles.empty}`}
+            >
+              <p>SELECT AN</p>
+              <p>APPOINTMENT</p>
             </div>
-          )
-        ) : (
-          <div
-            className={`${styles["appointment-info-container"]} ${styles.empty}`}
-          >
-            <p>SELECT AN</p>
-            <p>APPOINTMENT</p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+			<div className="troubleContainer">
+				<span>HAVING TROUBLE!? WE GOT YOU</span>
+				<a className="blueLink" href="tel:+19493923422">CLICK HERE TO CALL US</a>
+			</div>
+    </>
   );
 }

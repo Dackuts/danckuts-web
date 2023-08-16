@@ -90,7 +90,13 @@ export default function InfoCheck({
       <Spinner />
     </div>
   ) : (
-    <>{STEPS[step]}</>
+    <>
+      {STEPS[step]}
+      {step != "continue" ? (<div className="troubleContainer">
+        <span>HAVING TROUBLE!? WE GOT YOU</span>
+        <a className="blueLink" href="tel:+19493923422">CLICK HERE TO CALL US</a>
+      </div>) : null}
+    </>
   );
 }
 
@@ -115,9 +121,7 @@ function SetPhone({ nextStep }) {
         onChange={setPhone}
         label="Enter your mobile number"
       />
-      <p className={styles.inputText}>Returning to Danckuts? Enter the number associated w your profile</p>
       <input onClick={() => nextStep(phone)} type="submit" value="TEXT ME" />
-      <p className='hint-text'>Trouble logging in? Call (949) 392-3422</p>
     </div>
   );
 }

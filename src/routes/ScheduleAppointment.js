@@ -11,6 +11,7 @@ import { sleep } from "../utils/time";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { getMe, postCreateDependent } from "../api/auth";
+import { keyBy as _keyBy } from "lodash";
 
 export default function ScheduleAppointment({
 	name,
@@ -30,6 +31,7 @@ export default function ScheduleAppointment({
 	const [newDependent, setNewDependent] = useState(false);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
+	const keyedLocations = _keyBy(locations, "location");
 
 	useEffect(() => {
 		setLoading(locations == null);
@@ -128,7 +130,7 @@ export default function ScheduleAppointment({
 				Submit
 			</span>
 		</div>
-	) : dependent === undefined ? (
+	) : (dependent === undefined && urlParams.rescheduled === "false") ? (
 		<div className={styles.container}>
 			<p className={styles.heading}>NEW APPOINTMENT, WHO THIS!?</p>
 			<p>Select who this appointment is for 👇</p>
@@ -166,6 +168,7 @@ export default function ScheduleAppointment({
 			<p className={styles.heading}>
 				LET’S MAKE IT OFFICIAL
 			</p>
+			<p>Confirm details and accept below to book it!</p>
 			<p className={styles.heading}>
 				{dependent?.id != null ? dependent?.name : name}
 			</p>
@@ -174,6 +177,9 @@ export default function ScheduleAppointment({
 				<span>{DateTime.fromISO(urlParams.time).toFormat("LLLL d")}</span>
 				<span className={styles.appointmentContainerTime}>{DateTime.fromISO(urlParams.time).toFormat("h:mm a")}</span>
 			</div>
+			<p className={styles.addressText}>
+				@ {keyedLocations[urlParams.location].address}
+			</p>
 			<div className={styles.seperator}></div>
 			<p className={styles.info}>
 				By providing information and clicking on{" "}

@@ -204,3 +204,9 @@ input[type="submit"]:disabled {
 .refresh:hover {
   text-decoration: underline;
 }
+
+.addressText {
+  color: var(--color-primary-500);
+  text-align: center;
+  font-size: 1.5rem;
+}
