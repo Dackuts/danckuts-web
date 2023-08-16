@@ -92,7 +92,7 @@ export default function InfoCheck({
   ) : (
     <>
       {STEPS[step]}
-      {step != "continue" ? (<div className="troubleContainer">
+      {step !== "continue" ? (<div className="troubleContainer">
         <span>HAVING TROUBLE!? WE GOT YOU</span>
         <a className="blueLink" href="tel:+19493923422">CLICK HERE TO CALL US</a>
       </div>) : null}
