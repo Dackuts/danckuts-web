@@ -94,7 +94,7 @@ export default function InfoCheck({
       {STEPS[step]}
       {step !== "continue" ? (<div className="troubleContainer">
         <span>HAVING TROUBLE!? WE GOT YOU</span>
-        <a className="blueLink" href="tel:+19493923422">CLICK HERE TO CALL US</a>
+        <a className="blueLink" href="tel:1-949-392-3422">CLICK HERE TO CALL US</a>
       </div>) : null}
     </>
   );
@@ -142,7 +142,7 @@ function SetCode({ nextStep }) {
             government is. In order to receive automated texts again and
             take yourself off of the DNC list you need to text “start” to this
             number</p>
-          <a href="tel:+19493923422">(949) 392-3422</a>
+          <a href="tel:1-949-392-3422">(949) 392-3422</a>
         </div>
       ) : null}
       <p className={styles.heading}>WHATS THE PASSWORD!?</p>

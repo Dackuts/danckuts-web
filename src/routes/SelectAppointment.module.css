@@ -69,11 +69,8 @@
 } */
 
 .location-header {
-  background-color: var(--background-3);
   height: 6rem;
-  display: flex;
   align-items: center;
-  padding: 0 1rem;
 }
 
 .cancel-link {
@@ -145,6 +142,7 @@
 .location-address {
   margin: 0;
   color: var(--color-primary-500);
+  font-family: "Exo 2", sans-serif;
 }
 
 .scheduler-container {
@@ -220,4 +218,11 @@
     padding: 1.5rem 0;
     pointer-events: all;
   }
+}
+
+.heading {
+  font-size: 2rem;
+  color: var(--color-primary-500);
+  margin: 0;
+  text-transform: uppercase;
 }

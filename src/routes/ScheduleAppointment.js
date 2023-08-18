@@ -174,7 +174,7 @@ export default function ScheduleAppointment({
 			</p>
 			<div className={styles.appointmentContainer}>
 				<span className={styles.appointmentContainerWeekday}>{DateTime.fromISO(urlParams.time).toFormat("cccc")}</span>
-				<span>{DateTime.fromISO(urlParams.time).toFormat("LLLL d")}</span>
+				<span className={styles.appointmentContainerDate}>{DateTime.fromISO(urlParams.time).toFormat("LLLL d")}</span>
 				<span className={styles.appointmentContainerTime}>{DateTime.fromISO(urlParams.time).toFormat("h:mm a")}</span>
 			</div>
 			<p className={styles.addressText}>

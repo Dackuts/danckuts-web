@@ -109,6 +109,10 @@
   color: white;
 }
 
+.appointmentContainerDate {
+  font-family: "Exo 2", sans-serif;
+}
+
 .appointmentContainerTime {
   text-decoration: underline;
 }
@@ -209,4 +213,5 @@ input[type="submit"]:disabled {
   color: var(--color-primary-500);
   text-align: center;
   font-size: 1.5rem;
+  font-family: "Exo 2", sans-serif;
 }

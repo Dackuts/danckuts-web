@@ -50,7 +50,8 @@ export default function SelectAppointment({ locations, token }) {
               </div>
             )}
             <div className={styles["location-header"]}>
-              <span>To book an appointment please select a location below</span>
+              <p className={styles.heading}>Let's Book It!</p>
+              <p>Select a location to book at.</p>
             </div>
             {locations != null ? (
               locations.map((location, i) => {
@@ -101,7 +102,7 @@ export default function SelectAppointment({ locations, token }) {
       </div>
 			<div className="troubleContainer">
 				<span>HAVING TROUBLE!? WE GOT YOU</span>
-				<a className="blueLink" href="tel:+19493923422">CLICK HERE TO CALL US</a>
+				<a className="blueLink" href="tel:1-949-392-3422">CLICK HERE TO CALL US</a>
 			</div>
     </>
   );

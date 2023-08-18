@@ -130,7 +130,7 @@ export default function TimeSelector({
             </>
           ) : (
             <div className={styles["no-time-text"]}>
-              <p>No appointments available on this day. Select another day.</p>
+              <p>We're fully booked today 🥴</p>
             </div>
           )}
         </div>
