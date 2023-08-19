@@ -96,10 +96,10 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  width: min-content;
+  width: max(min-content, 120px);
   align-items: center;
   margin: 1rem auto;
-  gap: 0.5rem
+  gap: 0.5rem;
 }
 
 .appointmentContainerWeekday {
@@ -120,6 +120,10 @@
 .seperator {
   width: 100%;
   border-top: 2px solid var(--background-3);
+}
+
+.center-text {
+  text-align: center;
 }
 
 .info {

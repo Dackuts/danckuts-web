@@ -166,9 +166,9 @@ export default function ScheduleAppointment({
 	) : (
 		<div className={styles.container}>
 			<p className={styles.heading}>
-				LET’S MAKE IT OFFICIAL
+				One Last Step
 			</p>
-			<p>Confirm details and accept below to book it!</p>
+			<p className={styles["center-text"]}>Confirm details and accept below to book it!</p>
 			<p className={styles.heading}>
 				{dependent?.id != null ? dependent?.name : name}
 			</p>
@@ -181,19 +181,6 @@ export default function ScheduleAppointment({
 				@ {keyedLocations[urlParams.location].address}
 			</p>
 			<div className={styles.seperator}></div>
-			<p className={styles.info}>
-				By providing information and clicking on{" "}
-				{urlParams.rescheduled === "true"
-					? "Reschedule Appointment"
-					: "Book Appointment"}{" "}
-				below you agree to our Privacy Policy.
-			</p>
-			<a
-				className={styles["info-link"]}
-				href="https://danckuts.com/app-privacy"
-			>
-				Privacy Policy
-			</a>
 			<Checkbox
 				value={terms}
 				setValue={setTerms}
@@ -212,6 +199,19 @@ export default function ScheduleAppointment({
 					}
 				/>
 			</div>
+			<p className={styles.info}>
+				By providing information and clicking on{" "}
+				{urlParams.rescheduled === "true"
+					? "Reschedule Appointment"
+					: "Book Appointment"}{" "}
+				below you agree to our Privacy Policy.
+			</p>
+			<a
+				className={styles["info-link"]}
+				href="https://danckuts.com/app-privacy"
+			>
+				Privacy Policy
+			</a>
 			{!!error?.atlas && (
 				<div className={styles.popup} >
 					<p className={styles.error}>{error?.atlas}</p>
