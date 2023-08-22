@@ -142,7 +142,7 @@ function SetCode({ nextStep }) {
             government is. In order to receive automated texts again and
             take yourself off of the DNC list you need to text “start” to this
             number</p>
-          <a href="tel:1-949-392-3422">(949) 392-3422</a>
+          <a href="tel:1-949-329-2054">(949) 329-2054</a>
         </div>
       ) : null}
       <p className={styles.heading}>WHATS THE PASSWORD!?</p>
