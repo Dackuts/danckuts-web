@@ -136,12 +136,14 @@ function SetCode({ nextStep }) {
         <div className={styles.popup} >
           <div className={styles.x} onClick={() => setShowPopup(false)}>✖</div>
           <p className={styles.heading}>NOBODY PANIC!</p>
-          <p>If you are not receiving automated texts from us it is almost
-            certainly because you accidentally placed yourself on the DNC
-            (do not contact) list. We are not in control of this! The big bad
-            government is. In order to receive automated texts again and
-            take yourself off of the DNC list you need to text “start” to this
-            number</p>
+          <p>You're most likely not receiving texts from us because you
+            responded "cancel" to one of our automated appointment
+            reminders because you wanted to cancel your appointment.
+            "Cancel" is a key word that stops us from sending you messages
+            from our system. This is out of our control. In order to get texts
+            from us again TEXT "START" to the the number below. We will
+            NEVER use our automated system to text you marketing
+            materials; only appointment reminders.</p>
           <a href="tel:1-949-329-2054">(949) 329-2054</a>
         </div>
       ) : null}
