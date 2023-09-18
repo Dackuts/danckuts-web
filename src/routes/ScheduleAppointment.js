@@ -68,7 +68,7 @@ export default function ScheduleAppointment({
 				try {
 				} catch (error) {
 					const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
-					window.top.location.href = `https://danckuts.com/booking-confirmation?utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}}`;
+					window.top.location.href = `https://danckuts.com/booking-confirmation?utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}`;
 				} finally {
 					window.top.location.href = "https://danckuts.com/booking-confirmation";
 				}

@@ -10,14 +10,16 @@ export function postCancelAppointment(appointmentId) {
 	return api.post(`${BASE_URL}/cancel`, { appointmentId });
 }
 
-export function postCreateAppointment({ location, time, dependent = null }) {
+export async function postCreateAppointment({ location, time, dependent = null }) {
 	const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
 	localStorage.removeItem("queryGoogleTag");
+	if(googleTag != null) {
+		await api.post(`/create-google-marketing?utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}`)
+	}
 	return api.post(`${BASE_URL}/schedule`, {
 		location,
 		time,
 		...(dependent != null && { dependent }),
-		...(googleTag != null && { googleTag }),
 	});
 }
 
