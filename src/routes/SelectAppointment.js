@@ -5,6 +5,7 @@ import Map from "../components/Map";
 import { useNavigate } from "react-router-dom";
 import TimeSelector from "../components/TimeSelector";
 import { getMe } from "../api/auth";
+import { useTokenStore } from "../store";
 
 export default function SelectAppointment({ locations, token }) {
   const navigate = useNavigate();
@@ -12,8 +13,9 @@ export default function SelectAppointment({ locations, token }) {
   const [loading, setLoading] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [cancelPopup, setCancelPopup] = useState(new URLSearchParams(window.location.search).get("cancel") === 'true' ?? false)
+  const setToken = useTokenStore(state => state.setToken);
   const unsetSession = () => {
-    localStorage.removeItem("token");
+    setToken(null)
     window.location.reload()
   }
 

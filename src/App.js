@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import { getLocations } from "./api/locations";
 import InfoCheck from "./components/InfoCheck";
 import AppointmentList from "./routes/AppointmentList";
+import { useTokenStore } from "./store";
 
 export default function App() {
-	const [token, setStateToken] = useState("");
+	const { token, setToken } = useTokenStore((state) => state);
 	const [name, setName] = useState("");
 	const [dependents, setDependents] = useState(null);
 	const [locations, setLocations] = useState(null);
@@ -37,20 +38,14 @@ export default function App() {
 			fbclid,
 		};
 		if (queryToken != null) {
-			localStorage.setItem("token", queryToken);
+			setToken(queryToken);
 		}
-		console.log(queryGoogleTag);
-		if (!Object.values(queryGoogleTag).every((x) => x == null)) {
-			localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
-		}
-		const token = localStorage.getItem("token");
-		setStateToken(token);
+		try {
+			if (!Object.values(queryGoogleTag).every((x) => x == null)) {
+				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
+			}
+		} catch (_err) {}
 	}, []);
-
-	function setToken(token) {
-		localStorage.setItem("token", token);
-		setStateToken(token);
-	}
 
 	return (
 		<main className={`${styles.main} card`}>

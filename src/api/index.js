@@ -1,5 +1,6 @@
 import axios from "axios";
 import { REACT_APP_API_URL } from "../config";
+import { tokenStore } from "../store";
 
 const api = axios.create({
   baseURL: REACT_APP_API_URL,
@@ -8,7 +9,8 @@ const api = axios.create({
 
 api.interceptors.request.use(
   async function (config) {
-    const token = localStorage.getItem("token");
+    console.log(tokenStore)
+    const {token} = tokenStore.getState();
     config.headers.authorization = `Bearer ${token || ""}`;
     return config;
   },
