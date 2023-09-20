@@ -45,7 +45,7 @@ export default function App() {
 				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
 			}
 		} catch (_err) {}
-	}, []);
+	}, [setToken]);
 
 	return (
 		<main className={`${styles.main} card`}>
