@@ -26,12 +26,14 @@ export default function App() {
 		const urlParams = new URLSearchParams(window.location.search);
 		const queryToken = urlParams.get("token");
 		const utm_source = urlParams.get("utm_source");
+		const utm_term = urlParams.get("utm_term");
 		const utm_medium = urlParams.get("utm_medium");
 		const utm_campaign = urlParams.get("utm_campaign");
 		const gclid = urlParams.get("gclid");
 		const fbclid = urlParams.get("fbclid");
 		const queryGoogleTag = {
 			utm_source,
+			utm_term,
 			utm_medium,
 			utm_campaign,
 			gclid,
