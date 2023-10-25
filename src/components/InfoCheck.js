@@ -94,7 +94,7 @@ export default function InfoCheck({
       {STEPS[step]}
       {step !== "continue" ? (<div className="troubleContainer">
         <span>HAVING TROUBLE!? WE GOT YOU</span>
-        <a className="blueLink" href="tel:1-949-392-3422">CLICK HERE TO CALL US</a>
+        <a className="blueLink" href="tel:1-866-343-4737">CLICK HERE TO CALL US</a>
       </div>) : null}
     </>
   );
@@ -144,7 +144,7 @@ function SetCode({ nextStep }) {
             from us again TEXT "START" to the the number below. We will
             NEVER use our automated system to text you marketing
             materials; only appointment reminders.</p>
-          <a href="tel:1-949-329-2054">(949) 329-2054</a>
+          <a href="tel:1-866-343-4737">(866) 343-4737</a>
         </div>
       ) : null}
       <p className={styles.heading}>WHATS THE PASSWORD!?</p>
