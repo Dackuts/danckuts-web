@@ -234,3 +234,40 @@
   direction: ltr;
   color: #6c6767;
 }
+
+.location,
+.location-selected {
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+}
+
+.location-selected {
+  background-color: var(--color-primary-300);
+  color: var(--background);
+}
+
+.location-selected:hover {
+  background-color: var(--color-primary-500);
+}
+
+.location-selected>* {
+  color: var(--background) !important;
+}
+
+.location:hover {
+  background-color: var(--background-2);
+}
+
+.location-heading {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-500);
+  font-style: italic;
+}
+
+.location-address {
+  margin: 0;
+  color: var(--color-primary-500);
+  font-family: "Exo 2", sans-serif;
+}

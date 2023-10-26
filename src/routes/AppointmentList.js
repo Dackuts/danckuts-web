@@ -13,7 +13,8 @@ export default function AppointmentList({ locations, dependents }) {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [appointments, setAppointments] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
-  const [reschedule, setReschedule] = useState(false);
+  const [reschedule, setReschedule] = useState(0);
+  const [rescheduleLocation, setRescheduleLocation] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -104,13 +105,36 @@ export default function AppointmentList({ locations, dependents }) {
         </div>
         <div className={styles["split-b"]}>
           {selectedAppointment != null ? (
-            reschedule ? (
+            reschedule !== 0 ? (
               <div className={`${styles["scheduler-container"]} card`}>
-                <TimeSelector
-                  location={appointments[selectedAppointment].location}
-                  reschedule={true}
-                  appointmentId={appointments[selectedAppointment].id}
-                />
+                {reschedule === 1 ?
+                  locations.map((location, i) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setReschedule(2)
+                          setRescheduleLocation(location.location)
+                          console.log(location)
+                        }}
+                        className={styles.location}
+                        key={location.location}
+                      >
+                        <p className={styles["location-heading"]}>
+                          {location.location}
+                        </p>
+                        <p className={styles["location-address"]}>
+                          {location.address}
+                        </p>
+                      </div>
+                    );
+                  })
+                  : (
+                    <TimeSelector
+                      location={rescheduleLocation}
+                      reschedule={true}
+                      appointmentId={appointments[selectedAppointment].id}
+                    />)
+                }
               </div>
             ) : (
               <div className={styles["appointment-info-container"]}>
@@ -165,7 +189,7 @@ export default function AppointmentList({ locations, dependents }) {
                   </div>
                   <div className={styles["button-container"]}>
                     <button
-                      onClick={() => setReschedule(true)}
+                      onClick={() => setReschedule(1)}
                       className={`${styles.button} ${styles["appointment-reschedule"]}`}
                     >
                       Reschedule
@@ -190,10 +214,10 @@ export default function AppointmentList({ locations, dependents }) {
           )}
         </div>
       </div>
-			<div className="troubleContainer">
-				<span>HAVING TROUBLE!? WE GOT YOU</span>
-				<a className="blueLink" href="tel:1-866-343-4737">CLICK HERE TO CALL US</a>
-			</div>
+      <div className="troubleContainer">
+        <span>HAVING TROUBLE!? WE GOT YOU</span>
+        <a className="blueLink" href="tel:1-866-343-4737">CLICK HERE TO CALL US</a>
+      </div>
     </>
   );
 }
