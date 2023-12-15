@@ -39,6 +39,12 @@ export default function App() {
 			gclid,
 			fbclid,
 		};
+		try {
+			const pastToken = localStorage.getItem("token");
+			if(pastToken != null) {
+				setToken(pastToken);
+			}
+		} catch (_err) {}
 		if (queryToken != null) {
 			setToken(queryToken);
 		}
