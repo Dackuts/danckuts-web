@@ -41,10 +41,10 @@ export default function App() {
 		};
 		try {
 			const pastToken = localStorage.getItem("token");
-			if(pastToken != null) {
+			if (pastToken != null) {
 				setToken(pastToken);
 			}
-		} catch (_err) {}
+		} catch (_err) { }
 		if (queryToken != null) {
 			setToken(queryToken);
 		}
@@ -52,7 +52,7 @@ export default function App() {
 			if (!Object.values(queryGoogleTag).every((x) => x == null)) {
 				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
 			}
-		} catch (_err) {}
+		} catch (_err) { }
 	}, [setToken]);
 
 	return (
@@ -85,6 +85,24 @@ export default function App() {
 					/>
 					<Route
 						path="/appointment-list"
+						element={
+							<InfoCheck
+								name={name}
+								setName={setName}
+								setDependents={setDependents}
+								dependents={dependents}
+								token={token}
+								setToken={setToken}
+							>
+								<AppointmentList
+									dependents={dependents}
+									locations={locations}
+								/>
+							</InfoCheck>
+						}
+					/>
+					<Route
+						path="/appointment-list/:appointmentId"
 						element={
 							<InfoCheck
 								name={name}

@@ -4,7 +4,7 @@ import Spinner from "../components/Spinner";
 import { getAppointments, postCancelAppointment } from "../api/appointments";
 import { DateTime } from "luxon";
 import TimeSelector from "../components/TimeSelector";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { keyBy as _keyBy } from "lodash";
 import { getMe } from "../api/auth";
 
@@ -15,6 +15,7 @@ export default function AppointmentList({ locations, dependents }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [reschedule, setReschedule] = useState(0);
   const [rescheduleLocation, setRescheduleLocation] = useState(null);
+  const { appointmentId } = useParams();
 
   useEffect(() => {
     async function fetchData() {
@@ -22,6 +23,13 @@ export default function AppointmentList({ locations, dependents }) {
       const { user } = await getMe();
       setCurrentUser(user);
       setAppointments(future);
+
+      if(appointmentId != null){
+        const appointmentIndex = future.map(apt => `${apt.id}`).indexOf(appointmentId);
+        if(appointmentIndex !== -1) {
+          setSelectedAppointment(appointmentIndex)
+        }
+      }
     }
     fetchData();
   }, []);
