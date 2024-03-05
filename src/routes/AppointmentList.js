@@ -32,7 +32,7 @@ export default function AppointmentList({ locations, dependents }) {
       }
     }
     fetchData();
-  }, []);
+  }, [appointmentId]);
 
   function cancelAppointment() {
     postCancelAppointment(appointments[selectedAppointment].id);
