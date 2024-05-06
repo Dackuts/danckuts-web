@@ -63,7 +63,7 @@
 }
 
 .time-text-container {
-  height: 85%;
+  height: 80%;
   overflow-y: scroll;
 }
 
@@ -96,4 +96,18 @@
 .time-picker-container {
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.v-spacer {
+  flex-grow: 1;
+}
+
+
+.pt-text {
+  margin-top: auto;
+  text-align: center;
+  width: 100;
+  display: block;
 }

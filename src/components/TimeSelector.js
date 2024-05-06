@@ -135,6 +135,8 @@ export default function TimeSelector({
           )}
         </div>
       )}
+      <div className={styles["v-spacer"]}></div>
+      <span className={styles["pt-text"]}>all times in pacific time</span>
     </div>
   );
 }

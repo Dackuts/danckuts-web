@@ -7,12 +7,17 @@ import { getLocations } from "./api/locations";
 import InfoCheck from "./components/InfoCheck";
 import AppointmentList from "./routes/AppointmentList";
 import { useTokenStore } from "./store";
+import { Settings } from "luxon";
 
 export default function App() {
 	const { token, setToken } = useTokenStore((state) => state);
 	const [name, setName] = useState("");
 	const [dependents, setDependents] = useState(null);
 	const [locations, setLocations] = useState(null);
+
+	useEffect(() => {
+		Settings.defaultZone = "America/Los_Angeles"
+	}, [])
 
 	useEffect(() => {
 		async function fetchData() {
