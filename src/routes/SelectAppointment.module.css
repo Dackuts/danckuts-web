@@ -45,7 +45,6 @@
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 
@@ -57,7 +56,6 @@
 
 .location-container {
   margin: 2rem 2rem 0;
-  flex-grow: 1;
   max-height: 100%;
   overflow-y: auto;
 }
