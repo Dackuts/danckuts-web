@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScheduleAppointment from "./routes/ScheduleAppointment";
 import SelectAppointment from "./routes/SelectAppointment";
 import { useEffect, useState } from "react";
-import { getLocations } from "./api/locations";
+import { getLocations, getHiddenLocations } from "./api/locations";
 import InfoCheck from "./components/InfoCheck";
 import AppointmentList from "./routes/AppointmentList";
 import { useTokenStore } from "./store";
@@ -14,6 +14,7 @@ export default function App() {
 	const [name, setName] = useState("");
 	const [dependents, setDependents] = useState(null);
 	const [locations, setLocations] = useState(null);
+	const [hiddenLocations, setHiddenLocations] = useState(null);
 
 	useEffect(() => {
 		Settings.defaultZone = "America/Los_Angeles"
@@ -23,6 +24,14 @@ export default function App() {
 		async function fetchData() {
 			const data = await getLocations();
 			setLocations(data.locations);
+		}
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		async function fetchData() {
+			const data = await getHiddenLocations();
+			setHiddenLocations(data.locations);
 		}
 		fetchData();
 	}, []);
@@ -67,6 +76,10 @@ export default function App() {
 					<Route
 						path="/"
 						element={<SelectAppointment locations={locations} token={token} />}
+					/>
+					<Route
+						path="/hidden"
+						element={<SelectAppointment locations={hiddenLocations} token={token} />}
 					/>
 					<Route
 						path="/schedule"
