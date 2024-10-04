@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScheduleAppointment from "./routes/ScheduleAppointment";
 import SelectAppointment from "./routes/SelectAppointment";
 import { useEffect, useState } from "react";
-import { getLocations, getHiddenLocations } from "./api/locations";
+import { getAllLocations } from "./api/locations";
 import InfoCheck from "./components/InfoCheck";
 import AppointmentList from "./routes/AppointmentList";
 import { useTokenStore } from "./store";
@@ -14,24 +14,15 @@ export default function App() {
 	const [name, setName] = useState("");
 	const [dependents, setDependents] = useState(null);
 	const [locations, setLocations] = useState(null);
-	const [hiddenLocations, setHiddenLocations] = useState(null);
 
 	useEffect(() => {
-		Settings.defaultZone = "America/Los_Angeles"
-	}, [])
-
-	useEffect(() => {
-		async function fetchData() {
-			const data = await getLocations();
-			setLocations(data.locations);
-		}
-		fetchData();
+		Settings.defaultZone = "America/Los_Angeles";
 	}, []);
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await getHiddenLocations();
-			setHiddenLocations(data.locations);
+			const data = await getAllLocations();
+			setLocations(data.locations);
 		}
 		fetchData();
 	}, []);
@@ -58,7 +49,7 @@ export default function App() {
 			if (pastToken != null) {
 				setToken(pastToken);
 			}
-		} catch (_err) { }
+		} catch (_err) {}
 		if (queryToken != null) {
 			setToken(queryToken);
 		}
@@ -66,7 +57,7 @@ export default function App() {
 			if (!Object.values(queryGoogleTag).every((x) => x == null)) {
 				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
 			}
-		} catch (_err) { }
+		} catch (_err) {}
 	}, [setToken]);
 
 	return (
@@ -75,11 +66,21 @@ export default function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={<SelectAppointment locations={locations} token={token} />}
+						element={
+							<SelectAppointment
+								locations={locations?.filter((h) => !h.hidden)}
+								token={token}
+							/>
+						}
 					/>
 					<Route
 						path="/hidden"
-						element={<SelectAppointment locations={hiddenLocations} token={token} />}
+						element={
+							<SelectAppointment
+								locations={locations?.filter((h) => h.hidden)}
+								token={token}
+							/>
+						}
 					/>
 					<Route
 						path="/schedule"
