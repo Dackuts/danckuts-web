@@ -62,20 +62,31 @@
   cursor: pointer;
 }
 
-.time-text-container {
+.time-text-list {
   height: 80%;
   overflow-y: scroll;
+}
+
+.time-text-container {
+  margin: 0.25rem 20%;
 }
 
 .time-text {
   text-align: center;
   font-size: 2rem;
-  margin: 0.25rem 20%;
   padding: 0.5rem;
   color: var(--color-primary-500);
   cursor: pointer;
   border: 2px solid #00000000;
   border-radius: 0.4rem;
+  margin: 0;
+}
+
+.slot-text {
+  display: block;
+  width: fit-content;
+  margin: -0.75em auto 0;
+  background-color: #fff;
 }
 
 .no-time-text {

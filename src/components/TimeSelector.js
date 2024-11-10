@@ -108,23 +108,25 @@ export default function TimeSelector({
           <Spinner />
         </div>
       ) : (
-        <div className={styles["time-text-container"]}>
+        <div className={styles["time-text-list"]}>
           {availability.dates[selected].length > 0 ? (
             <>
               {availability.dates[selected].map((d, i) => {
                 return (
-                  <p
-                    onClick={() =>
-                      navigate(
-                        `/schedule?time=${d}&rescheduled=${reschedule ? appointmentId : false
-                        }&location=${location}`
-                      )
-                    }
-                    className={`number ${styles["time-text"]}`}
-                    key={i}
-                  >
-                    {DateTime.fromISO(d).toFormat("hh : mm a")}
-                  </p>
+                  <div key={i} className={styles["time-text-container"]}>
+                    <p
+                      onClick={() =>
+                        navigate(
+                          `/schedule?time=${d}&rescheduled=${reschedule ? appointmentId : false
+                          }&location=${location}`
+                        )
+                      }
+                      className={`number ${styles["time-text"]}`}
+                    >
+                      {DateTime.fromISO(d).toFormat("hh : mm a")}
+                    </p>
+                    <span className={`${styles["slot-text"]}`}>{availability.slots[selected][d]} available</span>
+                  </div>
                 );
               })}
             </>
