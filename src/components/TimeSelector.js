@@ -125,7 +125,7 @@ export default function TimeSelector({
                     >
                       {DateTime.fromISO(d).toFormat("hh : mm a")}
                     </p>
-                    <span className={`${styles["slot-text"]}`}>{availability.slots[selected][d]} available</span>
+                    {/* <span className={`${styles["slot-text"]}`}>{availability.slots[selected][d]} available</span> */}
                   </div>
                 );
               })}
