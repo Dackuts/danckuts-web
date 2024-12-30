@@ -27,3 +27,10 @@ export async function postCreateAppointment({ location, time, dependent = null }
 export function postRescheduleAppointment({ appointmentId, location, time }) {
 	return api.post(`${BASE_URL}/reschedule`, { appointmentId, location, time });
 }
+
+export function postForceReminder(appointmentId, reminderType) {
+	return api.post(`${BASE_URL}/force-reminder`, {
+		appointmentId,
+		reminderType
+	});
+}

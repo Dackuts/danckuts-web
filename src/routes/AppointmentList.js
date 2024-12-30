@@ -1,12 +1,23 @@
 import styles from "./AppointmentList.module.css";
 import { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
-import { getAppointments, postCancelAppointment } from "../api/appointments";
+import { getAppointments, postCancelAppointment, postForceReminder } from "../api/appointments";
 import { DateTime } from "luxon";
 import TimeSelector from "../components/TimeSelector";
 import { useNavigate, useParams } from "react-router-dom";
 import { keyBy as _keyBy } from "lodash";
 import { getMe } from "../api/auth";
+
+const TESTING_PHONE_NUMBERS = [
+  "(929) 269-6855", 
+  "(949) 680-6703", 
+  "(951) 200-9318", 
+  "(949) 556-2474", 
+  "(949) 547-1619",
+  "(949) 669-7884",
+  "(909) 525-7460",
+  "(714) 943-8870"
+]
 
 export default function AppointmentList({ locations, dependents }) {
   const navigate = useNavigate();
@@ -24,9 +35,9 @@ export default function AppointmentList({ locations, dependents }) {
       setCurrentUser(user);
       setAppointments(future);
 
-      if(appointmentId != null){
+      if (appointmentId != null) {
         const appointmentIndex = future.map(apt => `${apt.id}`).indexOf(appointmentId);
-        if(appointmentIndex !== -1) {
+        if (appointmentIndex !== -1) {
           setSelectedAppointment(appointmentIndex)
         }
       }
@@ -37,6 +48,10 @@ export default function AppointmentList({ locations, dependents }) {
   function cancelAppointment() {
     postCancelAppointment(appointments[selectedAppointment].id);
     navigate("../?cancel=true");
+  }
+
+  function sendReminder(reminderType) {
+    postForceReminder(appointments[selectedAppointment].id, reminderType).then(() => alert("reminder sent!")).catch(() => alert("failed to send reminder!"))
   }
 
   const keyedLocations = _keyBy(locations, "location");
@@ -209,6 +224,17 @@ export default function AppointmentList({ locations, dependents }) {
                       Cancel
                     </button>
                   </div>
+                  {
+                    TESTING_PHONE_NUMBERS.includes(currentUser.phoneNumber) &&
+                    <div className={styles["button-container"]}>
+                      <button
+                        onClick={() => sendReminder("2_hours_appt_new")}
+                        className={`${styles.button} ${styles["appointment-reschedule"]}`}
+                      >
+                        Force Send Reminder
+                      </button>
+                    </div>
+                  }
                 </div>
               </div>
             )
