@@ -14,6 +14,7 @@ export default function App() {
 	const [name, setName] = useState("");
 	const [dependents, setDependents] = useState(null);
 	const [locations, setLocations] = useState(null);
+	const [restrictionlevel, setRestrictionlevel] = useState(null);
 
 	useEffect(() => {
 		Settings.defaultZone = "America/Los_Angeles";
@@ -92,12 +93,14 @@ export default function App() {
 								dependents={dependents}
 								token={token}
 								setToken={setToken}
+								setRestrictionlevel={setRestrictionlevel}
 							>
 								<ScheduleAppointment
 									name={name}
 									dependents={dependents}
 									setDependents={setDependents}
 									locations={locations}
+									restrictionlevel={restrictionlevel}
 								/>
 							</InfoCheck>
 						}
@@ -112,6 +115,7 @@ export default function App() {
 								dependents={dependents}
 								token={token}
 								setToken={setToken}
+								setRestrictionlevel={setRestrictionlevel}
 							>
 								<AppointmentList
 									dependents={dependents}
@@ -130,6 +134,7 @@ export default function App() {
 								dependents={dependents}
 								token={token}
 								setToken={setToken}
+								setRestrictionlevel={setRestrictionlevel}
 							>
 								<AppointmentList
 									dependents={dependents}

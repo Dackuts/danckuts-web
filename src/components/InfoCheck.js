@@ -18,6 +18,7 @@ export default function InfoCheck({
   token,
   setToken,
   children,
+  setRestrictionlevel,
 }) {
   const [step, setStep] = useState(token ? "continue" : "requestPhone");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -28,7 +29,7 @@ export default function InfoCheck({
       // eslint-disable-next-line eqeqeq
       if (token != "" && name == "" && dependents == null) {
         const {
-          user: { name, dependents },
+          user: { name, dependents, restrictionLevel },
         } = await getMe();
         setLoading(false);
         if (name) {
@@ -37,6 +38,7 @@ export default function InfoCheck({
         if (dependents) {
           setDependents(dependents);
         }
+        setRestrictionlevel(restrictionLevel)
       } else {
         setStep("continue");
       }

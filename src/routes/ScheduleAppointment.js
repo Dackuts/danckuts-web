@@ -18,6 +18,7 @@ export default function ScheduleAppointment({
 	dependents,
 	setDependents,
 	locations,
+	restrictionlevel
 }) {
 	const navigate = useNavigate();
 	const [terms, setTerms] = useState(false);
@@ -32,6 +33,13 @@ export default function ScheduleAppointment({
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const keyedLocations = _keyBy(locations, "location");
+	const [showWarningPopup, setShowWarningPopup] = useState();
+	const [showRestrictedPopup, setShowRestrictedPopup] = useState();
+
+	useEffect(() => {
+		setShowWarningPopup(restrictionlevel === 'warning')
+		setShowRestrictedPopup(restrictionlevel === 'restricted')
+	}, [restrictionlevel])
 
 	useEffect(() => {
 		setLoading(locations == null);
@@ -132,6 +140,38 @@ export default function ScheduleAppointment({
 		</div>
 	) : (dependent === undefined && urlParams.rescheduled === "false") ? (
 		<div className={styles.container}>
+			{showWarningPopup ? (
+				<div className={styles["popup-wrapper"]}>
+				<div className={styles.popup}>
+					<p className={styles["popup-title"]}>ACCOUNT WARNING</p>
+					<p>
+						{"1 warning received. Cancels < 90 min. or misses = a warning. Multi warnings will result in account suspension. If this's a mistake, pleae contact us."}
+					</p>
+					<p>
+						<a className="blueLink" href="tel:1-866-343-4737">CONTACT US</a>
+					</p>
+					<button className={styles["ok-button"]} onClick={() => setShowWarningPopup(false)}>
+						Ok
+					</button>
+				</div>
+				</div>
+			) : null}
+			{showRestrictedPopup ? (
+				<div className={styles["popup-wrapper"]}>
+				<div className={styles.popup}>
+					<p className={styles["popup-title"]}>ACCOUNT SUSPENDED</p>
+					<p>
+						{"To book an appointment, please contact us."}
+					</p>
+					<p>
+						<a className="blueLink" href="tel:1-866-343-4737">CONTACT US</a>
+					</p>
+					<button className={styles["ok-button"]} onClick={() => navigate("../")}>
+						Ok
+					</button>
+				</div>
+				</div>
+			) : null}
 			<p className={styles.heading}>NEW APPOINTMENT, WHO THIS!?</p>
 			<p>Select who this appointment is for 👇</p>
 			{[
