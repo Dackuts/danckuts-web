@@ -44,7 +44,7 @@ export default function InfoCheck({
       }
     }
     fetchData();
-  }, [token, name, setName, setDependents, dependents]);
+  }, [token, name, setName, setDependents, dependents, setRestrictionlevel]);
 
   async function nextStep(data) {
     setLoading(true);
