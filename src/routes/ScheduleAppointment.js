@@ -140,7 +140,7 @@ export default function ScheduleAppointment({
 		</div>
 	) : (dependent === undefined && urlParams.rescheduled === "false") ? (
 		<div className={styles.container}>
-			{showWarningPopup ? (
+			{false ? (
 				<div className={styles["popup-wrapper"]}>
 				<div className={styles.popup}>
 					<p className={styles["popup-title"]}>ACCOUNT WARNING</p>
@@ -156,7 +156,7 @@ export default function ScheduleAppointment({
 				</div>
 				</div>
 			) : null}
-			{showRestrictedPopup ? (
+			{false ? (
 				<div className={styles["popup-wrapper"]}>
 				<div className={styles.popup}>
 					<p className={styles["popup-title"]}>ACCOUNT SUSPENDED</p>
