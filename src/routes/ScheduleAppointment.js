@@ -34,7 +34,7 @@ export default function ScheduleAppointment({
 	const [lastName, setLastName] = useState("");
 	const keyedLocations = _keyBy(locations, "location");
 	const [showWarningPopup, setShowWarningPopup] = useState(false);
-	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
+	const [showRestrictedPopup, ] = useState(false);
 
 	useEffect(() => {
 		// setShowWarningPopup(restrictionlevel === 'warning')
