@@ -33,12 +33,12 @@ export default function ScheduleAppointment({
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const keyedLocations = _keyBy(locations, "location");
-	const [showWarningPopup, setShowWarningPopup] = useState();
-	const [showRestrictedPopup, setShowRestrictedPopup] = useState();
+	const [showWarningPopup, setShowWarningPopup] = useState(false);
+	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
 
 	useEffect(() => {
-		setShowWarningPopup(restrictionlevel === 'warning')
-		setShowRestrictedPopup(restrictionlevel === 'restricted')
+		// setShowWarningPopup(restrictionlevel === 'warning')
+		// setShowRestrictedPopup(restrictionlevel === 'restricted')
 	}, [restrictionlevel])
 
 	useEffect(() => {
@@ -140,7 +140,7 @@ export default function ScheduleAppointment({
 		</div>
 	) : (dependent === undefined && urlParams.rescheduled === "false") ? (
 		<div className={styles.container}>
-			{false ? (
+			{showWarningPopup ? (
 				<div className={styles["popup-wrapper"]}>
 				<div className={styles.popup}>
 					<p className={styles["popup-title"]}>ACCOUNT WARNING</p>
@@ -156,7 +156,7 @@ export default function ScheduleAppointment({
 				</div>
 				</div>
 			) : null}
-			{false ? (
+			{showRestrictedPopup ? (
 				<div className={styles["popup-wrapper"]}>
 				<div className={styles.popup}>
 					<p className={styles["popup-title"]}>ACCOUNT SUSPENDED</p>
