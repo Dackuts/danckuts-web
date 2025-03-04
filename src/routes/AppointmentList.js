@@ -7,6 +7,7 @@ import TimeSelector from "../components/TimeSelector";
 import { useNavigate, useParams } from "react-router-dom";
 import { keyBy as _keyBy } from "lodash";
 import { getMe } from "../api/auth";
+import { isWithinNextHour } from "../utils/time";
 
 const TESTING_PHONE_NUMBERS = [
   "(929) 269-6855", 
@@ -27,6 +28,7 @@ export default function AppointmentList({ locations, dependents }) {
   const [reschedule, setReschedule] = useState(0);
   const [rescheduleLocation, setRescheduleLocation] = useState(null);
   const { appointmentId } = useParams();
+  const [showCancelWarning, setShowCancelWarning] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -67,6 +69,19 @@ export default function AppointmentList({ locations, dependents }) {
   return (
     <>
       <div className={styles.split}>
+        {showCancelWarning ? (
+          <div className={styles["popup-wrapper"]}>
+          <div className={styles.popup}>
+            <p className={styles["popup-title"]}>Hey</p>
+            <p>
+              {"Sometimes you gotta cancel, it happens! Canceling under 1 hrs notice, multiple times, can affect your ability to book online."}
+            </p>
+            <button className={styles["ok-button"]} onClick={cancelAppointment}>
+              Ok, got it!
+            </button>
+          </div>
+          </div>
+        ) : null}
         <div className={styles["split-a"]}>
           <div className={styles["appointment-container"]}>
             <div className={styles["appointment-header"]}>
@@ -188,6 +203,7 @@ export default function AppointmentList({ locations, dependents }) {
                       {DateTime.fromISO(
                         appointments[selectedAppointment].date
                       ).toFormat("a")}
+                      {JSON.stringify(isWithinNextHour(appointments[selectedAppointment].date))}
                     </p>
                   </div>
                   <div>
@@ -218,7 +234,7 @@ export default function AppointmentList({ locations, dependents }) {
                       Reschedule
                     </button>
                     <button
-                      onClick={cancelAppointment}
+                      onClick={() => isWithinNextHour(appointments[selectedAppointment].date) ? setShowCancelWarning(true) : cancelAppointment()}
                       className={`${styles.button} ${styles["appointment-cancel"]}`}
                     >
                       Cancel

@@ -32,3 +32,11 @@ export function getDates(date) {
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function isWithinNextHour(date) {
+  const now = new Date();
+  const realDate = new Date(date);
+  const nextHour = new Date(now.getTime() + 60 * 60 * 1000); // Add 60 minutes in milliseconds
+
+  return realDate > now && realDate <= nextHour;
+}
