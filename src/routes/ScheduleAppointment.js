@@ -33,12 +33,12 @@ export default function ScheduleAppointment({
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const keyedLocations = _keyBy(locations, "location");
-	const [showWarningPopup, setShowWarningPopup] = useState(false);
-	const [showRestrictedPopup, ] = useState(false);
+	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
 
 	useEffect(() => {
 		// setShowWarningPopup(restrictionlevel === 'warning')
-		// setShowRestrictedPopup(restrictionlevel === 'restricted')
+		setShowRestrictedPopup(restrictionlevel === 'restricted')
+		// setShowRestrictedPopup(true)
 	}, [restrictionlevel])
 
 	useEffect(() => {
@@ -140,31 +140,21 @@ export default function ScheduleAppointment({
 		</div>
 	) : (dependent === undefined && urlParams.rescheduled === "false") ? (
 		<div className={styles.container}>
-			{showWarningPopup ? (
-				<div className={styles["popup-wrapper"]}>
-				<div className={styles.popup}>
-					<p className={styles["popup-title"]}>ACCOUNT WARNING</p>
-					<p>
-						{"1 warning received. Cancels < 90 min. or misses = a warning. Multi warnings will result in account suspension. If this's a mistake, pleae contact us."}
-					</p>
-					<p>
-						<a className="blueLink" href="tel:1-866-343-4737">CONTACT US</a>
-					</p>
-					<button className={styles["ok-button"]} onClick={() => setShowWarningPopup(false)}>
-						Ok
-					</button>
-				</div>
-				</div>
-			) : null}
 			{showRestrictedPopup ? (
 				<div className={styles["popup-wrapper"]}>
 				<div className={styles.popup}>
-					<p className={styles["popup-title"]}>ACCOUNT SUSPENDED</p>
+					<p className={styles["popup-title"]}>Hey</p>
 					<p>
-						{"To book an appointment, please contact us."}
+						{"Don't worry, we'd still love to have you!"}
 					</p>
 					<p>
-						<a className="blueLink" href="tel:1-866-343-4737">CONTACT US</a>
+						{"BUT"}
+					</p>
+					<p>
+						{"A hold has been placed on your account. Please call us to schedule this appointment."}
+					</p>
+					<p>
+						<a className="blueLink" href="tel:1-949-392-3422">949-392-3422</a>
 					</p>
 					<button className={styles["ok-button"]} onClick={() => navigate("../")}>
 						Ok
