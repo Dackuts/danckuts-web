@@ -203,7 +203,6 @@ export default function AppointmentList({ locations, dependents }) {
                       {DateTime.fromISO(
                         appointments[selectedAppointment].date
                       ).toFormat("a")}
-                      {JSON.stringify(isWithinNextHour(appointments[selectedAppointment].date))}
                     </p>
                   </div>
                   <div>
