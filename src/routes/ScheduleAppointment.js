@@ -238,7 +238,7 @@ export default function ScheduleAppointment({
 			</p>
 			<a
 				className={styles["info-link"]}
-				href="https://danckuts.com/app-privacy"
+				href="https://book.danckuts.com/privacy-policy/"
 			>
 				Privacy Policy
 			</a>
