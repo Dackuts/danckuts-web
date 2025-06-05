@@ -30,6 +30,7 @@ export default function App() {
 
 	useEffect(() => {
 		const urlParams = new URLSearchParams(window.location.search);
+		const redirectUrl = urlParams.get("r");
 		const queryToken = urlParams.get("token");
 		const utm_source = urlParams.get("utm_source");
 		const utm_term = urlParams.get("utm_term");
@@ -54,6 +55,11 @@ export default function App() {
 		if (queryToken != null) {
 			setToken(queryToken);
 		}
+		try {
+			if(redirectUrl != null) {
+				localStorage.setItem("redirectUrl", redirectUrl)
+			}
+		} catch (_err) {}
 		try {
 			if (!Object.values(queryGoogleTag).every((x) => x == null)) {
 				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));

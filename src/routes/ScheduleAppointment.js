@@ -73,12 +73,11 @@ export default function ScheduleAppointment({
 		async function wait() {
 			if (confirmed && !error) {
 				await sleep(500);
-				try {
-				} catch (error) {
-					const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
-					window.top.location.href = `https://book.danckuts.com/confirmation?utm_term=${googleTag.utm_term}&utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}`;
+				let redirectUrl = localStorage.getItem("redirectUrl") ?? "https://book.danckuts.com/confirmation";
+				try {const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
+					window.top.location.href = `${redirectUrl}?utm_term=${googleTag.utm_term}&utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}`;
 				} finally {
-					window.top.location.href = "https://book.danckuts.com/confirmation";
+					window.top.location.href = redirectUrl;
 				}
 			}
 		}
