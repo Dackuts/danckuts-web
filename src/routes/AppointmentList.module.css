@@ -302,6 +302,7 @@
     0 3px 6px rgba(0, 0, 0, 0.10);
   font-family: "Exo 2", sans-serif;
   background-color: white;
+  max-width: 80%;
 }
 
 .popup-title {

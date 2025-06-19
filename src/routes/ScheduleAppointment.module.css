@@ -63,6 +63,7 @@
   border: solid 2px var(--color-primary-500);
   border-radius: 2rem;
   left: 0;
+  max-width: 80%;
 }
 
 .heading-center {
@@ -249,6 +250,7 @@ input[type="submit"]:disabled {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15),
     0 3px 6px rgba(0, 0, 0, 0.10);
   font-family: "Exo 2", sans-serif;
+  max-width: 80%;
 }
 
 .popup-title {

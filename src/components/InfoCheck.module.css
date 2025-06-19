@@ -33,6 +33,7 @@
   border: solid 2px var(--color-primary-500);
   border-radius: 2rem;
   left: 0;
+  max-width: 80%;
 }
 
 .x {
