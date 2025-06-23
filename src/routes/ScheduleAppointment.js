@@ -34,9 +34,9 @@ export default function ScheduleAppointment({
 	const [lastName, setLastName] = useState("");
 	const keyedLocations = _keyBy(locations, "location");
 	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
+	const [showWarningPopup, setShowWarningPopup] = useState(false);
 
 	useEffect(() => {
-		// setShowWarningPopup(restrictionlevel === 'warning')
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
 		// setShowRestrictedPopup(true)
 	}, [restrictionlevel])
@@ -74,7 +74,8 @@ export default function ScheduleAppointment({
 			if (confirmed && !error) {
 				await sleep(500);
 				let redirectUrl = localStorage.getItem("redirectUrl") ?? "https://book.danckuts.com/confirmation";
-				try {const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
+				try {
+					const googleTag = JSON.parse(localStorage.getItem("queryGoogleTag"));
 					window.top.location.href = `${redirectUrl}?utm_term=${googleTag.utm_term}&utm_source=${googleTag.utm_source}&utm_medium=${googleTag.utm_medium}&utm_campaign=${googleTag.utm_campaign}&gclid=${googleTag.gclid}&fbclid=${googleTag.fbclid}`;
 				} finally {
 					window.top.location.href = redirectUrl;
@@ -141,24 +142,24 @@ export default function ScheduleAppointment({
 		<div className={styles.container}>
 			{showRestrictedPopup ? (
 				<div className={styles["popup-wrapper"]}>
-				<div className={styles.popup}>
-					<p className={styles["popup-title"]}>Hey</p>
-					<p>
-						{"Don't worry, we'd still love to have you!"}
-					</p>
-					<p>
-						{"BUT"}
-					</p>
-					<p>
-						{"A hold has been placed on your account. Please call us to schedule this appointment."}
-					</p>
-					<p>
-						<a className="blueLink" href="tel:1-949-392-3422">949-392-3422</a>
-					</p>
-					<button className={styles["ok-button"]} onClick={() => navigate("../")}>
-						Ok
-					</button>
-				</div>
+					<div className={styles.popup}>
+						<p className={styles["popup-title"]}>Hey</p>
+						<p>
+							{"Don't worry, we'd still love to have you!"}
+						</p>
+						<p>
+							{"BUT"}
+						</p>
+						<p>
+							{"A hold has been placed on your account. Please call us to schedule this appointment."}
+						</p>
+						<p>
+							<a className="blueLink" href="tel:1-949-392-3422">949-392-3422</a>
+						</p>
+						<button className={styles["ok-button"]} onClick={() => navigate("../")}>
+							Ok
+						</button>
+					</div>
 				</div>
 			) : null}
 			<p className={styles.heading}>NEW APPOINTMENT, WHO THIS!?</p>
@@ -194,6 +195,22 @@ export default function ScheduleAppointment({
 		</div>
 	) : (
 		<div className={styles.container}>
+			{showWarningPopup ? (
+				<div className={styles["popup-wrapper"]}>
+					<div className={styles.popup}>
+						<p className={styles["popup-title"]}>Hey, real quick!</p>
+						<p>
+							<span style={{ fontWeight: "bold" }}>Last minute canceling</span> within 60 minutes
+							or <span style={{ fontWeight: "bold" }}>Missing an appointment</span>, can auto
+							trigger a hold to be placed on your
+							account if they occur back to back.
+						</p>
+						<button className={styles["ok-button"]} onClick={() => bookAppointment()}>
+							OK 👍
+						</button>
+					</div>
+				</div>
+			) : null}
 			<p className={styles.heading}>
 				One Last Step
 			</p>
@@ -219,7 +236,7 @@ export default function ScheduleAppointment({
 			<div>
 				<input
 					disabled={!terms}
-					onClick={bookAppointment}
+					onClick={() => setShowWarningPopup(true)}
 					type="submit"
 					value={
 						urlParams.rescheduled === "true"

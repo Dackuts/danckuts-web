@@ -71,18 +71,15 @@ export default function AppointmentList({ locations, dependents }) {
       <div className={styles.split}>
         {showCancelWarning ? (
           <div className={styles["popup-wrapper"]}>
-            <div className={styles.popup}>
-              <p className={styles["popup-title"]}>Hey, real quick!</p>
-              <p>
-                <span style={{fontWeight: "bold"}}>Last minute canceling</span> within 60 minutes
-                or <span style={{fontWeight: "bold"}}>Missing an appointment</span>, can auto
-                trigger a hold to be placed on your
-                account if they occur back to back.
-              </p>
-              <button className={styles["ok-button"]} onClick={cancelAppointment}>
-                OK 👍
-              </button>
-            </div>
+          <div className={styles.popup}>
+            <p className={styles["popup-title"]}>Hey</p>
+            <p>
+              {"Sometimes you gotta cancel, it happens! Canceling under 1 hrs notice, multiple times, can affect your ability to book online."}
+            </p>
+            <button className={styles["ok-button"]} onClick={cancelAppointment}>
+              Ok, got it!
+            </button>
+          </div>
           </div>
         ) : null}
         <div className={styles["split-a"]}>
