@@ -45,6 +45,7 @@ export default function ScheduleAppointment({
 
 	useEffect(() => {
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
+		setShowWarningPopup(restrictionlevel === 'warning')
 		// setShowRestrictedPopup(true)
 	}, [restrictionlevel])
 
