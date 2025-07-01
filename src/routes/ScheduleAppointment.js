@@ -4,6 +4,7 @@ import Checkbox from "../components/Checkbox";
 import {
 	postCreateAppointment,
 	postRescheduleAppointment,
+	getAppointments,
 } from "../api/appointments";
 import Spinner from "../components/Spinner";
 import { DateTime } from "luxon";
@@ -24,7 +25,7 @@ export default function ScheduleAppointment({
 	const [terms, setTerms] = useState(false);
 	const [confirmed, setConfirmed] = useState(false);
 	const [error, setError] = useState(false);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(locations == null);
 	const urlParams = Object.fromEntries(
 		new URLSearchParams(window.location.search).entries()
 	);
@@ -35,7 +36,10 @@ export default function ScheduleAppointment({
 	const keyedLocations = _keyBy(locations, "location");
 	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
 	const [showWarningPopup, setShowWarningPopup] = useState(false);
-	const [touchUpPopup, setTouchUpPopup] = useState(0)
+	const [showRecentAppointmentPopup, setShowRecentAppointmentPopup] = useState(false);
+	const [checkingRecentAppointments, setCheckingRecentAppointments] = useState(false);
+	const [recentAppointment, setRecentAppointment] = useState(null);
+	const [daysSinceLastAppointment, setDaysSinceLastAppointment] = useState(0);
 
 	useEffect(() => {
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
@@ -43,7 +47,36 @@ export default function ScheduleAppointment({
 	}, [restrictionlevel])
 
 	useEffect(() => {
+		setLoading(locations == null);
 	}, [locations]);
+
+	useEffect(() => {
+		async function checkRecentAppointments() {
+			setCheckingRecentAppointments(true);
+			try {
+				const { appointments } = await getAppointments();
+				const sevenDaysAgo = DateTime.now().minus({ days: 7 });
+				
+				const recentCompletedAppointment = appointments?.find(appointment => {
+					const appointmentDate = DateTime.fromISO(appointment.time);
+					return appointment.status === 'completed' && appointmentDate > sevenDaysAgo;
+				});
+				
+				if (recentCompletedAppointment) {
+					const daysSince = Math.floor(DateTime.now().diff(DateTime.fromISO(recentCompletedAppointment.time), 'days').days);
+					setRecentAppointment(recentCompletedAppointment);
+					setDaysSinceLastAppointment(daysSince);
+					setShowRecentAppointmentPopup(true);
+				}
+			} catch (error) {
+				console.error('Error checking recent appointments:', error);
+			} finally {
+				setCheckingRecentAppointments(false);
+			}
+		}
+		
+		checkRecentAppointments();
+	}, []);
 
 	async function bookAppointment() {
 		setLoading(true);
@@ -87,17 +120,37 @@ export default function ScheduleAppointment({
 	}, [confirmed, error, navigate]);
 
 	async function handleNewDependent() {
+		if (loading) return; // Prevent multiple calls
 		setLoading(true);
-		await postCreateDependent(firstName, lastName);
-		const {
-			user: { dependents },
-		} = await getMe();
-		setDependents(dependents);
-		await setNewDependent(false);
-		setLoading(false);
+		try {
+			await postCreateDependent(firstName, lastName);
+			const {
+				user: { dependents },
+			} = await getMe();
+			setDependents(dependents);
+			await setNewDependent(false);
+		} catch (error) {
+			console.error('Error creating dependent:', error);
+		} finally {
+			setLoading(false);
+		}
 	}
 
-	return loading ? (
+	async function handleTouchUpAppointment() {
+		if (loading) return; // Prevent multiple calls
+		setLoading(true);
+		// try {
+		// 	// Add any special logic for touch-up appointments here
+		// 	// For now, we'll proceed with regular booking but could add special flags
+		// 	await bookAppointment();
+		// } catch (error) {
+		// 	console.error('Error booking touch-up appointment:', error);
+		// 	setError(error);
+		// }
+		// Note: loading state is handled by bookAppointment function
+	}
+
+	return loading || checkingRecentAppointments ? (
 		<div className={`${styles["max-height"]} loading-container-full`}>
 			<Spinner />
 		</div>
@@ -134,8 +187,12 @@ export default function ScheduleAppointment({
 			<span
 				onClick={handleNewDependent}
 				className={styles["add-dependent-button"]}
+				style={{
+					opacity: loading ? 0.6 : 1,
+					cursor: loading ? 'not-allowed' : 'pointer'
+				}}
 			>
-				Submit
+				{loading ? 'Adding...' : 'Submit'}
 			</span>
 		</div>
 	) : (dependent === undefined && urlParams.rescheduled === "false") ? (
@@ -208,6 +265,31 @@ export default function ScheduleAppointment({
 						<button className={styles["ok-button"]} onClick={() => bookAppointment()}>
 							OK 👍
 						</button>
+					</div>
+				</div>
+			) : null}
+			{showRecentAppointmentPopup ? (
+				<div className={styles["popup-wrapper"]}>
+					<div className={styles.popup}>
+						<p className={styles["popup-title"]}>Hey, {name?.split(" ")?.[0]}!</p>
+						<p>
+							You just had an appointment {daysSinceLastAppointment === 0 ? 'today' : daysSinceLastAppointment === 1 ? 'yesterday' : `${daysSinceLastAppointment} days ago`}. Is this for a <span style={{ fontWeight: "bold" }}>touch up</span> to correct that last kut?
+						</p>
+						<div className={styles["button-wrapper"]}>
+							<button 
+								className={styles["ok-button"]} 
+								onClick={() => {
+									setShowRecentAppointmentPopup(false);
+									handleTouchUpAppointment();
+								}}
+								disabled={loading}
+							>
+								{loading ? 'Booking...' : 'Yes'}
+							</button>
+							<button className={styles["ok-button"]} onClick={() => setShowRecentAppointmentPopup(false)}>
+								No, I need a fresh kut
+							</button>
+						</div>
 					</div>
 				</div>
 			) : null}
