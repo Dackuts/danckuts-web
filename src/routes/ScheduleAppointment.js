@@ -24,7 +24,7 @@ export default function ScheduleAppointment({
 	const [terms, setTerms] = useState(false);
 	const [confirmed, setConfirmed] = useState(false);
 	const [error, setError] = useState(false);
-	const [loading, setLoading] = useState(locations == null);
+	const [loading, setLoading] = useState(true);
 	const urlParams = Object.fromEntries(
 		new URLSearchParams(window.location.search).entries()
 	);
@@ -35,6 +35,7 @@ export default function ScheduleAppointment({
 	const keyedLocations = _keyBy(locations, "location");
 	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
 	const [showWarningPopup, setShowWarningPopup] = useState(false);
+	const [touchUpPopup, setTouchUpPopup] = useState(0)
 
 	useEffect(() => {
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
@@ -42,7 +43,6 @@ export default function ScheduleAppointment({
 	}, [restrictionlevel])
 
 	useEffect(() => {
-		setLoading(locations == null);
 	}, [locations]);
 
 	async function bookAppointment() {

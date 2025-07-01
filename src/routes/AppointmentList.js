@@ -7,7 +7,7 @@ import TimeSelector from "../components/TimeSelector";
 import { useNavigate, useParams } from "react-router-dom";
 import { keyBy as _keyBy } from "lodash";
 import { getMe } from "../api/auth";
-import { isWithinNextHour } from "../utils/time";
+import { isWithinNextHour, sleep } from "../utils/time";
 
 const TESTING_PHONE_NUMBERS = [
   "(929) 269-6855",
@@ -28,7 +28,7 @@ export default function AppointmentList({ locations, dependents }) {
   const [reschedule, setReschedule] = useState(0);
   const [rescheduleLocation, setRescheduleLocation] = useState(null);
   const { appointmentId } = useParams();
-  const [showCancelWarning, setShowCancelWarning] = useState(false);
+  const [cancelWarning, setCancelWarning] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -66,22 +66,50 @@ export default function AppointmentList({ locations, dependents }) {
     "id"
   );
 
+  console.log(currentUser)
+
+  useEffect(() => {
+    async function wait() {
+      await sleep(500);
+      navigate("../");
+    }
+
+    if(cancelWarning === 2) {
+      wait();
+    }
+  }, [cancelWarning, navigate]);
+
   return (
     <>
       <div className={styles.split}>
-        {showCancelWarning ? (
-          <div className={styles["popup-wrapper"]}>
-          <div className={styles.popup}>
-            <p className={styles["popup-title"]}>Hey</p>
-            <p>
-              {"Sometimes you gotta cancel, it happens! Canceling under 1 hrs notice, multiple times, can affect your ability to book online."}
-            </p>
-            <button className={styles["ok-button"]} onClick={cancelAppointment}>
-              Ok, got it!
-            </button>
-          </div>
-          </div>
-        ) : null}
+        {cancelWarning > 0 ?
+          cancelWarning === 1 ?
+            (
+              <div className={styles["popup-wrapper"]}>
+                <div className={styles.popup}>
+                  <p className={styles["popup-title"]}>Hey, {currentUser.name?.split(" ")?.[0]}!</p>
+                  <p>
+                    It's too close to your appointment time (90 minutes) to <span style={{ fontWeight: "bold" }}>cancel</span> it BUT you can <span style={{ fontWeight: "bold" }}>reschedule</span> it.
+                  </p>
+                  <div className={styles["button-wrapper"]}>
+                    <button className={styles["ok-button"]} onClick={() => { setCancelWarning(0); setReschedule(1) }}>
+                      Reschedule
+                    </button>
+                    <button className={styles["ok-button"]} onClick={() => setCancelWarning(2)}>
+                      No, I'll keep it
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className={styles["popup-wrapper"]}>
+                <div className={styles.popup}>
+                  <p className={styles["popup-title"]}>Right On</p>
+                  <p>
+                    We will see you there, {currentUser.name?.split(" ")?.[0]}!
+                  </p>
+                </div>
+              </div>) : null}
         <div className={styles["split-a"]}>
           <div className={styles["appointment-container"]}>
             <div className={styles["appointment-header"]}>
@@ -233,7 +261,7 @@ export default function AppointmentList({ locations, dependents }) {
                       Reschedule
                     </button>
                     <button
-                      onClick={() => isWithinNextHour(appointments[selectedAppointment].date) ? setShowCancelWarning(true) : cancelAppointment()}
+                      onClick={() => isWithinNextHour(appointments[selectedAppointment].date) ? setCancelWarning(1) : cancelAppointment()}
                       className={`${styles.button} ${styles["appointment-cancel"]}`}
                     >
                       Cancel
