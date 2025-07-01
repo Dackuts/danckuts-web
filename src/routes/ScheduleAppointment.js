@@ -38,7 +38,6 @@ export default function ScheduleAppointment({
 	const [showWarningPopup, setShowWarningPopup] = useState(false);
 	const [recentAppointmentPopup, setRecentAppointmentPopup] = useState(false);
 	const [checkingRecentAppointments, setCheckingRecentAppointments] = useState(false);
-	const [recentAppointment, setRecentAppointment] = useState(null);
 	const [daysSinceLastAppointment, setDaysSinceLastAppointment] = useState(0);
 	const [futureAppointmentPopup, setFutureAppointmentPopup] = useState(false);
 	const [futureAppointment, setFutureAppointment] = useState(null);
@@ -68,7 +67,6 @@ export default function ScheduleAppointment({
 				
 				if (recentCompletedAppointment != null) {
 					const daysSince = Math.floor(DateTime.now().diff(DateTime.fromISO(recentCompletedAppointment.time), 'days').days);
-					setRecentAppointment(recentCompletedAppointment);
 					setDaysSinceLastAppointment(daysSince);
 					setRecentAppointmentPopup(1);
 				}
@@ -103,7 +101,7 @@ export default function ScheduleAppointment({
 		}
 		
 		checkRecentAppointments();
-	}, []);
+	}, [urlParams.rescheduled]);
 
 	async function bookAppointment() {
 		setLoading(true);
