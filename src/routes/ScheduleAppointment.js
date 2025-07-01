@@ -40,6 +40,9 @@ export default function ScheduleAppointment({
 	const [checkingRecentAppointments, setCheckingRecentAppointments] = useState(false);
 	const [recentAppointment, setRecentAppointment] = useState(null);
 	const [daysSinceLastAppointment, setDaysSinceLastAppointment] = useState(0);
+	const [futureAppointmentPopup, setFutureAppointmentPopup] = useState(false);
+	const [futureAppointment, setFutureAppointment] = useState(null);
+	const [daysUntilNextAppointment, setDaysUntilNextAppointment] = useState(0);
 
 	useEffect(() => {
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
@@ -55,8 +58,9 @@ export default function ScheduleAppointment({
 			setCheckingRecentAppointments(true);
 			try {
 				const {past, future} = await getAppointments();
-				const sevenDaysAgo = DateTime.now().minus({ days: 7 });
 				
+				// Check for recent past appointments (existing logic)
+				const sevenDaysAgo = DateTime.now().minus({ days: 7 });
 				const recentCompletedAppointment = past.find(appointment => {
 					const appointmentDate = DateTime.fromISO(appointment.date);
 					return appointmentDate > sevenDaysAgo;
@@ -67,6 +71,29 @@ export default function ScheduleAppointment({
 					setRecentAppointment(recentCompletedAppointment);
 					setDaysSinceLastAppointment(daysSince);
 					setRecentAppointmentPopup(1);
+				}
+
+				
+				// Check for future appointments within 7 days (new logic)
+				// Skip this check if we are rescheduling
+				if (urlParams.rescheduled === "false") {
+					const sevenDaysFromNow = DateTime.now().plus({ days: 7 });
+					const upcomingAppointment = future
+						.filter(appointment => {
+							const appointmentDate = DateTime.fromISO(appointment.date);
+							console.log(appointmentDate, sevenDaysFromNow)
+							return appointmentDate <= sevenDaysFromNow;
+						})
+						.sort((a, b) => DateTime.fromISO(a.date) - DateTime.fromISO(b.date))[0]; // Get the soonest one
+					
+					console.log(upcomingAppointment)
+
+					if (upcomingAppointment != null && !recentCompletedAppointment) {
+						const daysUntil = Math.ceil(DateTime.fromISO(upcomingAppointment.date).diff(DateTime.now(), 'days').days);
+						setFutureAppointment(upcomingAppointment);
+						setDaysUntilNextAppointment(daysUntil);
+						setFutureAppointmentPopup(1);
+					}
 				}
 			} catch (error) {
 				console.error('Error checking recent appointments:', error);
@@ -135,6 +162,30 @@ export default function ScheduleAppointment({
 			setLoading(false);
 		}
 	}
+
+	function handleFutureAppointmentReschedule() {
+		// Update URL params to reschedule the future appointment to the current time
+		const newUrlParams = new URLSearchParams(window.location.search);
+		newUrlParams.set('rescheduled', futureAppointment.id);
+		window.history.replaceState({}, '', window.location.pathname + '?' + newUrlParams.toString());
+		
+		// Update the urlParams object to reflect the change
+		Object.assign(urlParams, { rescheduled: futureAppointment.id });
+		
+		// Close the popup
+		setFutureAppointmentPopup(0);
+	}
+
+  useEffect(() => {
+    async function wait() {
+      await sleep(2000);
+      navigate("../");
+    }
+
+    if(futureAppointmentPopup === 2) {
+      wait();
+    }
+  }, [futureAppointmentPopup, navigate]);
 
 	return loading || checkingRecentAppointments ? (
 		<div className={`${styles["max-height"]} loading-container-full`}>
@@ -287,6 +338,37 @@ export default function ScheduleAppointment({
 						<button className={styles["ok-button"]} onClick={() => setRecentAppointmentPopup(0)}>
 							Ok
 						</button>
+					</div>
+				</div>
+			) : null}
+			{futureAppointmentPopup > 0 ? futureAppointmentPopup === 1 ? (
+				<div className={styles["popup-wrapper"]}>
+					<div className={styles.popup}>
+						<p className={styles["popup-title"]}>Hey, {name?.split(" ")?.[0]}!</p>
+						<p>
+							You have an appointment scheduled {daysUntilNextAppointment === 0 ? 'today' : daysUntilNextAppointment === 1 ? 'tomorrow' : `in ${daysUntilNextAppointment} days`} at {DateTime.fromISO(futureAppointment?.time).toFormat("h:mm a")} on {DateTime.fromISO(futureAppointment?.time).toFormat("LLLL d")}. Would you like to <span style={{ fontWeight: "bold" }}>reschedule</span> it to this new time instead?
+						</p>
+						<div className={styles["button-wrapper"]}>
+							<button 
+								className={styles["ok-button"]} 
+								onClick={handleFutureAppointmentReschedule}
+								disabled={loading}
+							>
+								Yes
+							</button>
+							<button className={styles["ok-button"]} onClick={() => setFutureAppointmentPopup(2)}>
+								No, I'll keep it
+							</button>
+						</div>
+					</div>
+				</div>
+			) : (
+				<div className={styles["popup-wrapper"]}>
+					<div className={styles.popup}>
+						<p className={styles["popup-title"]}>Right On</p>
+						<p>
+							We will see you there, {name?.split(" ")?.[0]}!
+						</p>
 					</div>
 				</div>
 			) : null}

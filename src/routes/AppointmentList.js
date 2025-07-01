@@ -66,11 +66,9 @@ export default function AppointmentList({ locations, dependents }) {
     "id"
   );
 
-  console.log(currentUser)
-
   useEffect(() => {
     async function wait() {
-      await sleep(500);
+      await sleep(2000);
       navigate("../");
     }
 
