@@ -36,7 +36,7 @@ export default function ScheduleAppointment({
 	const keyedLocations = _keyBy(locations, "location");
 	const [showRestrictedPopup, setShowRestrictedPopup] = useState(false);
 	const [showWarningPopup, setShowWarningPopup] = useState(false);
-	const [showRecentAppointmentPopup, setShowRecentAppointmentPopup] = useState(false);
+	const [recentAppointmentPopup, setRecentAppointmentPopup] = useState(false);
 	const [checkingRecentAppointments, setCheckingRecentAppointments] = useState(false);
 	const [recentAppointment, setRecentAppointment] = useState(null);
 	const [daysSinceLastAppointment, setDaysSinceLastAppointment] = useState(0);
@@ -54,19 +54,19 @@ export default function ScheduleAppointment({
 		async function checkRecentAppointments() {
 			setCheckingRecentAppointments(true);
 			try {
-				const { appointments } = await getAppointments();
+				const {past, future} = await getAppointments();
 				const sevenDaysAgo = DateTime.now().minus({ days: 7 });
 				
-				const recentCompletedAppointment = appointments?.find(appointment => {
-					const appointmentDate = DateTime.fromISO(appointment.time);
-					return appointment.status === 'completed' && appointmentDate > sevenDaysAgo;
+				const recentCompletedAppointment = past.find(appointment => {
+					const appointmentDate = DateTime.fromISO(appointment.date);
+					return appointmentDate > sevenDaysAgo;
 				});
 				
-				if (recentCompletedAppointment) {
+				if (recentCompletedAppointment != null) {
 					const daysSince = Math.floor(DateTime.now().diff(DateTime.fromISO(recentCompletedAppointment.time), 'days').days);
 					setRecentAppointment(recentCompletedAppointment);
 					setDaysSinceLastAppointment(daysSince);
-					setShowRecentAppointmentPopup(true);
+					setRecentAppointmentPopup(1);
 				}
 			} catch (error) {
 				console.error('Error checking recent appointments:', error);
@@ -134,20 +134,6 @@ export default function ScheduleAppointment({
 		} finally {
 			setLoading(false);
 		}
-	}
-
-	async function handleTouchUpAppointment() {
-		if (loading) return; // Prevent multiple calls
-		setLoading(true);
-		// try {
-		// 	// Add any special logic for touch-up appointments here
-		// 	// For now, we'll proceed with regular booking but could add special flags
-		// 	await bookAppointment();
-		// } catch (error) {
-		// 	console.error('Error booking touch-up appointment:', error);
-		// 	setError(error);
-		// }
-		// Note: loading state is handled by bookAppointment function
 	}
 
 	return loading || checkingRecentAppointments ? (
@@ -268,7 +254,7 @@ export default function ScheduleAppointment({
 					</div>
 				</div>
 			) : null}
-			{showRecentAppointmentPopup ? (
+			{recentAppointmentPopup > 0 ? recentAppointmentPopup === 1 ? (
 				<div className={styles["popup-wrapper"]}>
 					<div className={styles.popup}>
 						<p className={styles["popup-title"]}>Hey, {name?.split(" ")?.[0]}!</p>
@@ -279,17 +265,28 @@ export default function ScheduleAppointment({
 							<button 
 								className={styles["ok-button"]} 
 								onClick={() => {
-									setShowRecentAppointmentPopup(false);
-									handleTouchUpAppointment();
+									setRecentAppointmentPopup(2);
 								}}
 								disabled={loading}
 							>
-								{loading ? 'Booking...' : 'Yes'}
+								Yes
 							</button>
-							<button className={styles["ok-button"]} onClick={() => setShowRecentAppointmentPopup(false)}>
+							<button className={styles["ok-button"]} onClick={() => setRecentAppointmentPopup(0)}>
 								No, I need a fresh kut
 							</button>
 						</div>
+					</div>
+				</div>
+			) : (
+				<div className={styles["popup-wrapper"]}>
+					<div className={styles.popup}>
+						<p className={styles["popup-title"]}>7 DAY TOUCH UP POLICY</p>
+						<p>
+							No need to book for touch up's, {name?.split(" ")?.[0]}! <span style={{ fontWeight: "bold" }}>Walk in</span> to any location. let them know that you're there for a touch up and we'll take care of it for you!
+						</p>
+						<button className={styles["ok-button"]} onClick={() => setRecentAppointmentPopup(0)}>
+							Ok
+						</button>
 					</div>
 				</div>
 			) : null}
