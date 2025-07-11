@@ -298,7 +298,7 @@ export default function ScheduleAppointment({
 							trigger a hold to be placed on your
 							account if they occur back to back.
 						</p>
-						<button className={styles["ok-button"]} onClick={() => bookAppointment()}>
+						<button className={styles["ok-button"]} onClick={() => setShowWarningPopup(false)}>
 							OK 👍
 						</button>
 					</div>
