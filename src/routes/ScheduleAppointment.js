@@ -45,7 +45,7 @@ export default function ScheduleAppointment({
 
 	useEffect(() => {
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
-		setShowWarningPopup(restrictionlevel === 'warning')
+		// setShowWarningPopup(restrictionlevel === 'warning')
 		// setShowRestrictedPopup(true)
 	}, [restrictionlevel])
 
@@ -200,7 +200,7 @@ export default function ScheduleAppointment({
 			<div className={`${styles["max-height"]} ${styles["center-container"]}`}>
 				<p className={styles["heading-center"]}>
 					Appointment{" "}
-					{urlParams.rescheduled === "true" ? "Rescheduled" : "Confirmed"}!
+					{urlParams.rescheduled !== "false" ? "Rescheduled" : "Confirmed"}!
 				</p>
 			</div>
 		)
@@ -298,7 +298,7 @@ export default function ScheduleAppointment({
 							trigger a hold to be placed on your
 							account if they occur back to back.
 						</p>
-						<button className={styles["ok-button"]} onClick={() => setShowWarningPopup(false)}>
+						<button className={styles["ok-button"]} onClick={() => bookAppointment()}>
 							OK 👍
 						</button>
 					</div>
@@ -396,10 +396,16 @@ export default function ScheduleAppointment({
 			<div>
 				<input
 					disabled={!terms}
-					onClick={() => setShowWarningPopup(true)}
+					onClick={() => {
+						if(restrictionlevel === 'warning') {
+							setShowWarningPopup(true)
+						} else {
+							bookAppointment()
+						}
+					}}
 					type="submit"
 					value={
-						urlParams.rescheduled === "true"
+						urlParams.rescheduled !== "false"
 							? "Reschedule Appointment"
 							: "Book Appointment"
 					}
@@ -407,7 +413,7 @@ export default function ScheduleAppointment({
 			</div>
 			<p className={styles.info}>
 				By providing information and clicking on{" "}
-				{urlParams.rescheduled === "true"
+				{urlParams.rescheduled !== "false"
 					? "Reschedule Appointment"
 					: "Book Appointment"}{" "}
 				below you agree to our Privacy Policy.
