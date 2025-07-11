@@ -80,12 +80,12 @@ export default function ScheduleAppointment({
 					const upcomingAppointment = future
 						.filter(appointment => {
 							const appointmentDate = DateTime.fromISO(appointment.date);
-							console.log(appointmentDate, sevenDaysFromNow)
 							return appointmentDate <= sevenDaysFromNow;
+						}).filter(appointment => {
+							return appointment.dependent === dependent?.id
 						})
 						.sort((a, b) => DateTime.fromISO(a.date) - DateTime.fromISO(b.date))[0]; // Get the soonest one
 					
-					console.log(upcomingAppointment)
 
 					if (upcomingAppointment != null && !recentCompletedAppointment) {
 						const daysUntil = Math.ceil(DateTime.fromISO(upcomingAppointment.date).diff(DateTime.now(), 'days').days);
@@ -102,7 +102,7 @@ export default function ScheduleAppointment({
 		}
 		
 		checkRecentAppointments();
-	}, [urlParams.rescheduled]);
+	}, [urlParams.rescheduled, dependent?.id]);
 
 	async function bookAppointment() {
 		setLoading(true);
@@ -345,7 +345,7 @@ export default function ScheduleAppointment({
 					<div className={styles.popup}>
 						<p className={styles["popup-title"]}>Hey, {name?.split(" ")?.[0]}!</p>
 						<p>
-							You have an appointment scheduled {daysUntilNextAppointment === 0 ? 'today' : daysUntilNextAppointment === 1 ? 'tomorrow' : `in ${daysUntilNextAppointment} days`} at {DateTime.fromISO(futureAppointment?.time).toFormat("h:mm a")} on {DateTime.fromISO(futureAppointment?.time).toFormat("LLLL d")}. Would you like to <span style={{ fontWeight: "bold" }}>reschedule</span> it to this new time instead?
+							You have an appointment scheduled {daysUntilNextAppointment === 0 ? 'today' : daysUntilNextAppointment === 1 ? 'tomorrow' : `in ${daysUntilNextAppointment} days`} at {DateTime.fromISO(futureAppointment?.date).toFormat("h:mm a")} on {DateTime.fromISO(futureAppointment?.date).toFormat("LLLL d")}. Would you like to <span style={{ fontWeight: "bold" }}>reschedule</span> it to this new time instead?
 						</p>
 						<div className={styles["button-wrapper"]}>
 							<button 
