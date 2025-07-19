@@ -172,7 +172,7 @@ export default function AppointmentList({ locations, dependents }) {
             reschedule !== 0 ? (
               <div className={`${styles["scheduler-container"]} card`}>
                 {reschedule === 1 ?
-                  locations.map((location, i) => {
+                  locations.filter(l => !l.hidden).map((location, i) => {
                     return (
                       <div
                         onClick={() => {
