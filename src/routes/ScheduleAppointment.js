@@ -67,7 +67,7 @@ export default function ScheduleAppointment({
 				});
 				
 				if (recentCompletedAppointment != null) {
-					const daysSince = Math.floor(DateTime.now().diff(DateTime.fromISO(recentCompletedAppointment.time), 'days').days);
+					const daysSince = Math.floor(DateTime.now().diff(DateTime.fromISO(recentCompletedAppointment.date), 'days').days);
 					setDaysSinceLastAppointment(daysSince);
 					setRecentAppointmentPopup(1);
 				}
