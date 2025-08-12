@@ -266,8 +266,8 @@ export default function AppointmentList({ locations, dependents }) {
                     </button>
                     <button
                       onClick={() => {
-                        console.log(appointments[selectedAppointment].date, isWithinNextHour(appointments[selectedAppointment].date))
-                        // isWithinNextHour(appointments[selectedAppointment].date) ? setCancelWarning(1) : cancelAppointment()
+                        // console.log(appointments[selectedAppointment].date, isWithinNextHour(appointments[selectedAppointment].date))
+                        isWithinNextHour(appointments[selectedAppointment].date) ? setCancelWarning(1) : cancelAppointment()
                       }}
                       className={`${styles.button} ${styles["appointment-cancel"]}`}
                     >
