@@ -1,5 +1,5 @@
 import styles from "./SelectAppointment.module.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Spinner from "../components/Spinner";
 import Map from "../components/Map";
 import { useNavigate } from "react-router-dom";
