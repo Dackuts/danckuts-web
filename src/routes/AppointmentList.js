@@ -182,7 +182,7 @@ export default function AppointmentList({ locations, dependents }) {
                             setRescheduleLocation(location.location)
                             console.log(location)
                           },
-                          className: selectedLocation === i ? styles["location-selected"] : styles.location,
+                          className: styles.location,
                           key: location.location,
                           ...(isEdwardsLocation && { 
                             href: "https://login.microsoftonline.com/c8fe7995-06f0-4bdf-8f2a-0c8a7986480d/oauth2/authorize?client_id=00000003-0000-0ff1-ce00-000000000000&response_mode=form_post&response_type=code%20id_token&resource=00000003-0000-0ff1-ce00-000000000000&scope=openid&nonce=7E408360B30118C67ECB2D9AA6DF85CAF2A319B4CFC0A87C-26595B233289042B74DE59A0CC96E94C8B21801A0EC872AAC07DC7D8BE54E522&redirect_uri=https%3A%2F%2Fedwardslifesciences.sharepoint.com%2F_forms%2Fdefault.aspx&state=OD0w&claims=%7B%22id_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&wsucxt=1&cobrandid=11bd8083-87e0-41b5-bb78-0bc43c8a8e8a&client-request-id=73d6b8a1-a023-9000-c2a3-bce27075fa1a#hair-salon" 
