@@ -177,7 +177,7 @@ export default function AppointmentList({ locations, dependents }) {
                       return React.createElement(
                         isEdwardsLocation ? 'a' : 'div',
                         {
-                          onClick:() => {
+                          onClick: isEdwardsLocation ? () => {} : () => {
                             setReschedule(2)
                             setRescheduleLocation(location.location)
                             console.log(location)

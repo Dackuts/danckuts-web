@@ -61,7 +61,7 @@ export default function SelectAppointment({ locations, token }) {
                 return React.createElement(
                   isEdwardsLocation ? 'a' : 'div',
                   {
-                    onClick: () => setSelectedLocation(i),
+                    onClick: isEdwardsLocation ? () => {} : () => setSelectedLocation(i),
                     className: selectedLocation === i ? styles["location-selected"] : styles.location,
                     style: {
                       display: "block",
