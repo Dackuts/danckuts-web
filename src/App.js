@@ -22,11 +22,20 @@ export default function App() {
 
 	useEffect(() => {
 		async function fetchData() {
+			const urlParams = new URLSearchParams(window.location.search);
 			const data = await getAllLocations();
-			setLocations(data.locations);
+			console.log(data)
+			const urlLocations = urlParams.get("locations");
+			console.log(urlLocations)
+			const locationFilter = urlLocations == null || urlLocations === "" ? [] : urlLocations.toLowerCase().split(",")
+			console.log(locationFilter)
+			const locationFiltered = data.locations?.filter((h) => !h.hidden)?.filter(l => locationFilter.length === 0 || locationFilter.includes(l.location.toLowerCase()))
+			console.log(locationFiltered)
+			setLocations(locationFiltered);
 		}
 		fetchData();
 	}, []);
+
 
 	useEffect(() => {
 		const urlParams = new URLSearchParams(window.location.search);
@@ -51,20 +60,20 @@ export default function App() {
 			if (pastToken != null) {
 				setToken(pastToken);
 			}
-		} catch (_err) {}
+		} catch (_err) { }
 		if (queryToken != null) {
 			setToken(queryToken);
 		}
 		try {
-			if(redirectUrl != null) {
+			if (redirectUrl != null) {
 				localStorage.setItem("redirectUrl", redirectUrl)
 			}
-		} catch (_err) {}
+		} catch (_err) { }
 		try {
 			if (!Object.values(queryGoogleTag).every((x) => x == null)) {
 				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
 			}
-		} catch (_err) {}
+		} catch (_err) { }
 	}, [setToken]);
 
 	return (
@@ -75,7 +84,7 @@ export default function App() {
 						path="/"
 						element={
 							<SelectAppointment
-								locations={locations?.filter((h) => !h.hidden)}
+								locations={locations}
 								token={token}
 							/>
 						}
@@ -84,7 +93,7 @@ export default function App() {
 						path="/hidden"
 						element={
 							<SelectAppointment
-								locations={locations?.filter((h) => h.hidden)}
+								locations={locations}
 								token={token}
 							/>
 						}
