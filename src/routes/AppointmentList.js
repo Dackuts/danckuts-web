@@ -305,7 +305,7 @@ export default function AppointmentList({ locations, dependents }) {
       </div>
       <div className="troubleContainer">
         <span>HAVING TROUBLE!? WE GOT YOU</span>
-        <a className="blueLink" href="tel:1-866-343-4737">CLICK HERE TO CALL US</a>
+        <a className="blueLink" target="_parent" href="tel:1-866-343-4737">CLICK HERE TO CALL US</a>
       </div>
     </>
   );
