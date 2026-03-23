@@ -419,13 +419,11 @@ export default function ScheduleAppointment({
 					: "Book Appointment"}{" "}
 				below you agree to our Privacy Policy.
 			</p>
-			<a
-				className={styles["info-link"]}
-				href="#"
-				onClick={(e) => { e.preventDefault(); setShowPrivacyPopup(true); }}
-			>
+			<button
+				className={styles["info-button-link"]}
+				onClick={() => setShowPrivacyPopup(true)} >
 				Privacy Policy
-			</a>
+			</button>
 			{!!error?.atlas && (
 				<div className={styles.popup} >
 					<p className={styles.error}>{error?.atlas}</p>
