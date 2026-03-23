@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Danckuts</title>
+  <link rel="icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/68091fe3233e665febd5f242/216e0f52-fffe-4e78-b589-2d3941348c4a/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,400;0,500;0,700;0,800;1,400;1,700">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #000;
+      padding: 0 2rem;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .logo a {
+      display: block;
+      line-height: 0;
+    }
+
+    header .logo img {
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+
+    header nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      transition: opacity 0.2s;
+    }
+
+    header nav a:hover { color: #fff; }
+
+    header nav .book-btn {
+      background: #fff;
+      color: #000;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      font-weight: 700;
+    }
+
+    header nav .book-btn:hover { color: #fff; }
+
+    /* ── Content ── */
+    main {
+      width: 100%;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* Map Squarespace typography classes */
+    p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+      color: #222;
+    }
+
+    p.s5 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      margin-bottom: 1.2rem;
+      color: #000;
+    }
+
+    p.s7 {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #333;
+    }
+
+    p.s9 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2.5rem;
+      margin-bottom: 0.6rem;
+      color: #000;
+    }
+
+    p.s11 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-style: italic;
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      color: #111;
+    }
+
+    p.s13 {
+      line-height: 0.5;
+      margin-bottom: 0.4rem;
+    }
+
+    a {
+      color: #333;
+      text-decoration: underline;
+    }
+
+    a:hover { color: #000; }
+
+    /* ── Footer ── */
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    footer .social-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    footer .social-links a:hover { color: #fff; }
+
+    footer p {
+      font-size: 0.75rem;
+      color: #666;
+      margin: 0;
+    }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    /* Animação X quando aberto */
+    header.open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    header.open .hamburger span:nth-child(2) { opacity: 0; }
+    header.open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile ── */
+    @media (max-width: 900px) {
+      header {
+        padding: 0 1rem;
+        position: relative;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 60px;
+      }
+
+      header .logo img { height: 44px; }
+
+      .hamburger { display: flex; }
+
+      header nav {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+        background: #111;
+        padding: 0.5rem 0 1rem;
+      }
+
+      header.open nav { display: flex; }
+
+      header nav a {
+        font-size: 0.9rem;
+        padding: 0.75rem 1.2rem;
+        width: 100%;
+        border-bottom: 1px solid #222;
+      }
+
+      header nav .book-btn {
+        background: none;
+        color: #fff;
+        border-radius: 0;
+        font-weight: 500;
+      }
+
+      main { padding: 2rem 1.2rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="https://www.danckuts.com/">
+        <img src="//images.squarespace-cdn.com/content/v1/68091fe3233e665febd5f242/48c11abd-4584-467c-8da5-188963d54aa4/Screenshot+2025-05-30+at+3.19.53+PM.png?format=300w" alt="Danckuts">
+      </a>
+    </div>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav>
+      <a href="https://book.danckuts.com/appointment/">Book Appointment</a>
+      <a href="https://www.danckuts.com/about" target="_blank">About</a>
+      <a href="https://www.danckutsinstitute.com/" target="_blank">Institute</a>
+      <a href="https://book.danckuts.com/mobile/" target="_blank">Mobile</a>
+    </nav>
+  </header>
+
+  <main>
+    <p><strong>Privacy Policy</strong></p>
+    <p class="s9"><strong>OUR PRIVACY MODEL FOR DANCKUTS</strong></p>
+    <p class="s7">This privacy policy ("Privacy Policy") governs your use of the services offered by Danckuts, including the Danckuts mobile application ("Mobile App"), the Danckuts web-based appointment scheduler ("Web Scheduler"), and any in-store services facilitated through Danckuts-operated devices (collectively, the "Services"). Danckuts created and operates the Services for the purpose of booking appointments and building your haircut experience.</p>
+    <p class="s7">This policy describes how Danckuts collects, uses, stores, shares, and protects information about you, including photographs collected at the point of service, and explains your rights with respect to that information.</p>
+    <p class="s7">By downloading, registering, or using the Mobile App, accessing or using the Web Scheduler, or receiving services at a Danckuts location, you acknowledge that you have read and understood this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please do not use our Services.</p>
+
+    <p class="s9"><strong>WHAT INFORMATION DO THE SERVICES OBTAIN AND HOW IS IT USED?</strong></p>
+    <p class="s11"><strong>User-Provided Information</strong></p>
+    <p class="s7">The Services obtain the information you provide when you download and register the Mobile App, create an account through the Web Scheduler, or otherwise interact with Danckuts. Registration with us is optional. However, please keep in mind that you may not be able to use some of the features offered by the Services unless you register with us.</p>
+    <p class="s7">When you register with and use the Services, you generally provide:</p>
+    <p>– your name, email address, age, user name, password, and other registration information;</p>
+    <p>– transaction-related information, such as when you make purchases, respond to any offers, or book appointments through either the Mobile App or the Web Scheduler;</p>
+    <p>– information you provide us when you contact us for help;</p>
+    <p>– credit card or payment information for the purchase and use of the Services; and</p>
+    <p>– information you enter into our system when using the Services, such as contact information, appointment preferences, and haircut history notes.</p>
+    <p class="s7">We may also use the information you provided to contact you from time to time to provide you with important information, required notices, and marketing promotions.</p>
+
+    <p class="s11"><strong>Automatically Collected Information</strong></p>
+    <p class="s7">In addition, the Services may collect certain information automatically, including, but not limited to, the type of device you use, your device's unique device ID, the IP address of your device, your operating system, the type of Internet browser you use, and information about the way you use the Services. This applies whether you are accessing the Services through the Mobile App or through the Web Scheduler on a desktop or mobile browser.</p>
+
+    <p class="s11"><strong>Photographic Information Collected at Point of Service</strong></p>
+    <p class="s7">When you visit a Danckuts location and check out through a Danckuts-operated device at the point of sale, a member of our staff may capture one or more photographs of you and/or your haircut result ("Appointment Photos"). Appointment Photos are taken by Danckuts staff using a Danckuts-operated device and are associated with your appointment record. Appointment Photos are not accessible to you directly through the Mobile App or the Web Scheduler; however, you may request access to or deletion of your Appointment Photos at any time by contacting us at <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a> as described in this policy.</p>
+    <p class="s7">Appointment Photos are collected by default as part of the checkout process. You have the right to opt out of photo collection at any time. The simplest way to opt out is to inform your barber or a Danckuts staff member at the time of checkout that you do not wish to have your photo taken. No photo will be captured for that visit or any subsequent visit once a standing opt-out has been recorded for your account.</p>
+    <p class="s7">You may also submit an opt-out request at any time by emailing <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a>. We will update your account preferences to reflect your opt-out within a reasonable time following receipt of your request.</p>
+    <p class="s7">If you opt out, no Appointment Photo will be captured. Please note that opting out of photo collection does not affect your ability to use any other features of the Services or to receive services at a Danckuts location.</p>
+    <p class="s7">Appointment Photos may be used for the following purposes:</p>
+    <p>– to maintain a visual record of your haircut history for reference by your stylist at future appointments;</p>
+    <p>– to improve and personalize the services we offer you;</p>
+    <p>– to develop, train, validate, and improve artificial intelligence, machine learning, and computer vision models and systems, whether operated by Danckuts or by authorized third-party partners ("AI Development Purposes");</p>
+    <p>– to license, sell, transfer, or otherwise commercialize Appointment Photos and derived datasets to third-party companies, including but not limited to technology companies, artificial intelligence companies, research institutions, and commercial enterprises, for use in AI training, product development, research, and related purposes ("Commercial Transfer"); and</p>
+    <p>– for internal quality assurance, stylist performance evaluation, and service improvement purposes.</p>
+    <p class="s7">When Appointment Photos are shared with third parties for AI Development Purposes or Commercial Transfer, those third parties may further process, modify, annotate, aggregate, or incorporate the photographs into datasets, models, or products. Danckuts will contractually require such third parties to handle Appointment Photos in a manner consistent with applicable law, but Danckuts does not control the downstream use of photographs once transferred to third parties under a valid commercial arrangement.</p>
+    <p class="s7">You acknowledge and agree that Appointment Photos may be de-identified, anonymized, aggregated, or otherwise modified prior to or following any commercial transfer or AI development use, and that such modified versions may not be subject to deletion requests made after the transfer has occurred. Danckuts will make commercially reasonable efforts to honor deletion requests prior to any commercial transfer or AI development use.</p>
+
+    <p class="s9"><strong>DOES THE APPLICATION COLLECT PRECISE REAL-TIME LOCATION INFORMATION OF THE DEVICE?</strong></p>
+    <p class="s7">When you use the Mobile App, we may use GPS technology (or other similar technology) to determine your current location in order to identify the city you are located within and display a location map with relevant service information and advertisements. We will not share your current location with other users or partners.</p>
+    <p class="s7">Location information is not collected through the Web Scheduler. If you do not want us to use your location through the Mobile App, you should turn off location services for the Mobile App in your mobile device settings and/or within the Mobile App itself.</p>
+
+    <p class="s9"><strong>DO THIRD PARTIES SEE AND/OR HAVE ACCESS TO INFORMATION OBTAINED BY THE SERVICES?</strong></p>
+    <p class="s7">Yes. We will share your information with third parties only in the ways that are described in this Privacy Policy. We may disclose User Provided Information, Automatically Collected Information, and Appointment Photos as follows:</p>
+    <p>– as required by law, such as to comply with a subpoena or similar legal process;</p>
+    <p>– when we believe in good faith that disclosure is necessary to protect our rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;</p>
+    <p>– with our trusted service providers who work on our behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this Privacy Policy;</p>
+    <p>– to third-party artificial intelligence companies, technology partners, research institutions, and commercial enterprises for the purposes of AI model training, machine learning development, computer vision research, product development, and related commercial purposes, as described more fully in the Photographic Information section of this policy;</p>
+    <p>– to purchasers or successors in the event that Danckuts is involved in a merger, acquisition, or sale of all or a portion of its assets, in which case you will be notified via email and/or a prominent notice on our website of any change in ownership or uses of your information, as well as any choices you may have regarding that information; and</p>
+    <p>– with your consent, for any other purpose disclosed to you at the time of collection.</p>
+
+    <p class="s9"><strong>USE OF INFORMATION FOR ARTIFICIAL INTELLIGENCE AND COMMERCIAL PURPOSES</strong></p>
+    <p class="s7">Danckuts may use information collected through the Services, including but not limited to Appointment Photos, account data, service history, and usage patterns, to develop, train, test, and improve artificial intelligence and machine learning technologies. This use may occur internally within Danckuts's own technology operations or in partnership with third-party AI and technology companies.</p>
+    <p class="s7">Danckuts may also enter into commercial arrangements with third parties under which Appointment Photos and related data are sold, licensed, or otherwise transferred for use in AI training datasets, computer vision model development, product research, and similar commercial applications. These commercial arrangements may involve:</p>
+    <p>– the outright sale or licensing of photographs or datasets containing photographs to third-party companies;</p>
+    <p>– the creation and commercialization of annotated or labeled datasets derived from Appointment Photos;</p>
+    <p>– participation in collaborative AI research and development projects with technology partners; and</p>
+    <p>– the incorporation of Appointment Photos into AI models, training pipelines, or commercial data products developed by or for third parties.</p>
+    <p class="s7">Danckuts will take reasonable steps to ensure that third parties receiving Appointment Photos or related data for commercial or AI development purposes are bound by appropriate contractual obligations regarding the handling and use of that data. However, once data has been transferred pursuant to a valid commercial arrangement, Danckuts's ability to control further downstream processing or use by the receiving party may be limited.</p>
+    <p class="s7">You may opt out of the use of your Appointment Photos for AI Development Purposes and Commercial Transfer at any time by informing your barber at the time of checkout or by emailing <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a>. Opting out of these uses will apply prospectively. Appointment Photos that have already been transferred to a third party prior to receipt of your opt-out request may not be retrievable or deletable by Danckuts.</p>
+
+    <p class="s9"><strong>WHAT ARE MY OPT-OUT RIGHTS?</strong></p>
+    <p class="s7">You have the right to opt out of certain uses of your information. Specifically:</p>
+    <p class="s11"><strong>Opting Out of Photo Collection</strong></p>
+    <p class="s7">The easiest way to opt out of Appointment Photos is to simply let your barber or a Danckuts staff member know at the time of checkout that you do not want your photo taken. Your preference will be noted and no photo will be captured for that visit. To establish a standing opt-out that applies to all future visits, email us at <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a> and we will update your account preferences accordingly.</p>
+    <p class="s11"><strong>Opting Out of AI and Commercial Use of Photos</strong></p>
+    <p class="s7">You may opt out of the use of your Appointment Photos for AI Development Purposes and Commercial Transfer by emailing <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a> with the subject line "Opt-Out: AI and Commercial Photo Use." We will process your request within a reasonable time. Please note that opt-outs apply prospectively and that Appointment Photos already incorporated into transferred datasets or AI models may not be recoverable.</p>
+    <p class="s11"><strong>Opting Out of All Data Collection</strong></p>
+    <p class="s7">You can stop all collection of information by the Mobile App by uninstalling it from your device. You may use the standard uninstall processes available on your mobile device or through the mobile application marketplace or network. If you no longer wish to use the Web Scheduler, you may discontinue access at any time. To request deletion of your account and associated data, email <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a>.</p>
+
+    <p class="s9"><strong>YOUR RIGHTS TO REQUEST ACCESS TO AND DELETION OF YOUR INFORMATION</strong></p>
+    <p class="s11"><strong>Right to Request Access</strong></p>
+    <p class="s7">You have the right to request information about the personal data we hold about you, including the categories of Appointment Photos associated with your account. Because Appointment Photos are captured on Danckuts-operated devices and stored in our internal systems, they are not directly viewable through the Mobile App or the Web Scheduler. To request information about or copies of your Appointment Photos or other personal data, please email <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a> with the subject line "Data Access Request." We will respond within a reasonable time and provide a description of the information we hold about you, and where technically feasible, copies of the specific data you request.</p>
+    <p class="s11"><strong>Right to Request Deletion</strong></p>
+    <p class="s7">You have the right to request the deletion of your Appointment Photos or other personal data associated with your account. To submit a deletion request, please email <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a> with the subject line "Data Deletion Request." We will process your request within a reasonable time and will delete or de-identify the requested information from our active systems, subject to the following limitations:</p>
+    <p>– We may be required to retain certain information to comply with our legal obligations, resolve disputes, or enforce our agreements.</p>
+    <p>– Some or all of your User-Provided Data may be required for the Services to function properly. Deletion of such data may result in the loss of access to certain features or your account.</p>
+    <p>– Appointment Photos that have already been transferred to a third party under a commercial arrangement prior to receipt of your deletion request may no longer be within our control. We will notify you if this is the case and inform you of what data we were able to delete.</p>
+    <p>– Automatically Collected Information that has been aggregated or de-identified may not be deletable on an individual basis.</p>
+    <p class="s7">We will confirm receipt of your deletion request and inform you of the outcome within a commercially reasonable time frame.</p>
+
+    <p class="s9"><strong>DATA RETENTION POLICY, MANAGING YOUR INFORMATION</strong></p>
+    <p class="s7">We will retain User-Provided data for as long as you use the Services and for a reasonable time thereafter. We will retain Automatically Collected information for up to 24 months and thereafter may store it in aggregate.</p>
+    <p class="s7">We will retain Appointment Photos for as long as you maintain an active account with Danckuts, and for a reasonable period thereafter for business continuity and legal compliance purposes. Appointment Photos that have been incorporated into AI training datasets or transferred to third parties under commercial arrangements may be retained by those third parties in accordance with their own data retention policies, which are outside of Danckuts's control.</p>
+    <p class="s7">If you would like us to delete your Appointment Photos or other personal data, please email <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a> and we will respond in a reasonable time, subject to the limitations described in the Right to Request Deletion section above.</p>
+
+    <p class="s9"><strong>CHILDREN</strong></p>
+    <p class="s7">We do not use the Services to knowingly solicit data from or market to children under the age of 13. We do not knowingly collect Appointment Photos or any other personal information from children under the age of 13. If a parent or guardian becomes aware that his or her child has provided us with information without their consent, he or she should contact us immediately at <a href="mailto:privacy@danckuts.com">privacy@danckuts.com</a>. We will delete such information from our files within a reasonable time.</p>
+
+    <p class="s9"><strong>SECURITY</strong></p>
+    <p class="s7">We are concerned about safeguarding the confidentiality of your information, including Appointment Photos. We provide physical, electronic, and procedural safeguards to protect the information we process and maintain. For example, we limit access to this information to authorized employees and contractors who need to know that information in order to operate, develop, or improve our Services.</p>
+    <p class="s7">Appointment Photos are stored using industry-standard security practices, including encrypted storage and access controls. When Appointment Photos are transmitted to third parties for commercial or AI development purposes, we use secure transmission methods appropriate to the sensitivity of the data.</p>
+    <p class="s7">Please be aware that, although we endeavor to provide reasonable security for the information we process and maintain, no security system can prevent all potential security breaches. In the event of a data breach that affects your personal information or Appointment Photos, we will notify you as required by applicable law.</p>
+
+    <p class="s9"><strong>CHANGES</strong></p>
+    <p class="s7">This Privacy Policy may be updated from time to time for any reason, including to reflect changes in our data practices, the introduction of new features across the Mobile App or the Web Scheduler, or changes in applicable law. We will notify you of any changes by posting the new Privacy Policy within the Mobile App, on the Web Scheduler, and via the app store. Where material changes are made, we will provide more prominent notice, which may include notification by email or an in-app alert.</p>
+    <p class="s7">You are advised to consult this Privacy Policy regularly for any changes. Your continued use of the Services following the posting of changes will constitute your acknowledgment of those changes and your agreement to be bound by the updated Privacy Policy. If you do not agree to the updated Privacy Policy, you should discontinue your use of the Services.</p>
+
+    <p class="s9"><strong>YOUR CONSENT</strong></p>
+    <p class="s7">By using the Mobile App, the Web Scheduler, or receiving services at a Danckuts location, you are consenting to our processing of your information as set forth in this Privacy Policy now and as amended by us. "Processing" means using cookies on a computer or handheld device or using or touching information in any way, including, but not limited to, collecting, storing, deleting, using, combining, and disclosing information, all of which activities will take place in the United States.</p>
+    <p class="s7">By visiting a Danckuts location and checking out through a Danckuts-operated device, you further consent to the potential capture of Appointment Photos and to the use of those photographs for the purposes described in this Privacy Policy, including AI Development Purposes and Commercial Transfer, unless you have exercised your opt-out rights as described herein. You may opt out at any time simply by informing your barber at checkout that you do not wish to have your photo taken.</p>
+    <p class="s7">If you reside outside the United States, your information will be transferred, processed, and stored in the United States under United States privacy standards. By using the Services, you consent to such transfer, processing, and storage.</p>
+
+    <p class="s9"><strong>CONTACT US</strong></p>
+    <p class="s7">If you have any questions regarding this Privacy Policy, our data practices, or your rights with respect to your personal information or Appointment Photos, or if you wish to submit an opt-out, access, or deletion request, please contact us via email at:</p>
+    <p class="s7"><a href="mailto:privacy@danckuts.com"><strong>privacy@danckuts.com</strong></a></p>
+    <p class="s7">We will make every reasonable effort to respond to your inquiry in a timely manner.</p>
+  </main>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://m.facebook.com/Danckuts/" target="_blank" rel="noreferrer">Facebook</a>
+      <a href="https://www.instagram.com/danckuts/" target="_blank" rel="noreferrer">Instagram</a>
+      <a href="https://youtube.com/@danckuts6959" target="_blank" rel="noreferrer">YouTube</a>
+    </div>
+    <p>&copy; Danckuts. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const header = document.querySelector('header');
+    const hamburger = document.querySelector('.hamburger');
+    hamburger.addEventListener('click', function () {
+      const isOpen = header.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('header nav a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        header.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>

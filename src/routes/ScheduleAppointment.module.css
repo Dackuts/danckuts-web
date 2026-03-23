@@ -288,3 +288,38 @@ input[type="submit"]:disabled {
   justify-content: center;
   align-items: center;
 }
+
+.privacy-popup {
+  position: absolute;
+  z-index: 51;
+  background: white;
+  border-radius: 1rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 2rem auto;
+  width: 90vw;
+  max-width: 900px;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.privacy-iframe {
+  flex: 1;
+  border: 0;
+  width: 100%;
+}
+
+.privacy-close {
+  align-self: flex-end;
+  margin: 0.5rem 0.5rem 0;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+  line-height: 1;
+}

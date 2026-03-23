@@ -42,6 +42,7 @@ export default function ScheduleAppointment({
 	const [futureAppointmentPopup, setFutureAppointmentPopup] = useState(false);
 	const [futureAppointment, setFutureAppointment] = useState(null);
 	const [daysUntilNextAppointment, setDaysUntilNextAppointment] = useState(0);
+	const [showPrivacyPopup, setShowPrivacyPopup] = useState(false);
 
 	useEffect(() => {
 		setShowRestrictedPopup(restrictionlevel === 'restricted')
@@ -420,7 +421,8 @@ export default function ScheduleAppointment({
 			</p>
 			<a
 				className={styles["info-link"]}
-				href="https://www.danckuts.com/privacy-policy/"
+				href="#"
+				onClick={(e) => { e.preventDefault(); setShowPrivacyPopup(true); }}
 			>
 				Privacy Policy
 			</a>
@@ -436,6 +438,30 @@ export default function ScheduleAppointment({
 					</button>
 				</div>
 			)}
+		{showPrivacyPopup && (
+			<div
+				className={styles["popup-wrapper"]}
+				onClick={() => setShowPrivacyPopup(false)}
+			>
+				<div
+					className={styles["privacy-popup"]}
+					onClick={(e) => e.stopPropagation()}
+				>
+					<button
+						className={styles["privacy-close"]}
+						type="button"
+						onClick={() => setShowPrivacyPopup(false)}
+					>
+						✕
+					</button>
+					<iframe
+						src="/privacy-policy.html"
+						title="Privacy Policy"
+						className={styles["privacy-iframe"]}
+					/>
+				</div>
+			</div>
+		)}
 		</div>
 	);
 }
