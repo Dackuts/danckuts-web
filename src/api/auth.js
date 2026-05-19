@@ -25,7 +25,7 @@ export async function postCheckPhoneNumber({ phoneNumber }) {
   const response = await api.post(`${BASE_URL}/phone-number-has-user`, {
     phoneNumber,
   });
-  return response.message === "User found";
+  return response?.exists === true;
 }
 
 export function postCreateAccount(user) {
