@@ -20,6 +20,21 @@ const TESTING_PHONE_NUMBERS = [
   "(714) 943-8870"
 ]
 
+// DNK-852: legacy appointments may have client_id pointing to a dependent while
+// `dependent` is null. Trust the API's resolved client name when present so the
+// row reflects who the appointment is actually for, not the logged-in parent.
+function getAppointmentClientName(appointment, currentUser, depsById, { full = false } = {}) {
+  if (appointment.dependent && depsById[appointment.dependent]) {
+    return depsById[appointment.dependent].name;
+  }
+  if (appointment.clientFirstName) {
+    return full && appointment.clientLastName
+      ? `${appointment.clientFirstName} ${appointment.clientLastName}`
+      : appointment.clientFirstName;
+  }
+  return full ? currentUser.name : currentUser.name.split(" ")[0];
+}
+
 export default function AppointmentList({ locations, dependents }) {
   const navigate = useNavigate();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -32,9 +47,18 @@ export default function AppointmentList({ locations, dependents }) {
 
   useEffect(() => {
     async function fetchData() {
-      const { future } = await getAppointments();
+      const { upcoming } = await getAppointments();
       const { user } = await getMe();
       setCurrentUser(user);
+
+      // Map upcoming appointments to match legacy structure
+      const future = upcoming.map(appt => ({
+        ...appt,
+        date: appt.appointment_date?.replace("Z", ""), // Map appointment_date to date and strip Z for local time
+        // location is an object in new API, we need the name
+        location: appt.location?.name || appt.location, 
+      }));
+
       setAppointments(future);
 
       if (appointmentId != null) {
@@ -133,9 +157,7 @@ export default function AppointmentList({ locations, dependents }) {
                         }}
                       >
                         <p className={styles["appointment-heading"]}>
-                          {!appointment.dependent
-                            ? currentUser.name.split(" ")[0]
-                            : depsById[appointment.dependent].name}{" "}
+                          {getAppointmentClientName(appointment, currentUser, depsById)}{" "}
                           - {appointment.location}
                         </p>
                         <p className={styles["appointment-address"]}>
@@ -179,7 +201,7 @@ export default function AppointmentList({ locations, dependents }) {
                         {
                           onClick: isEdwardsLocation ? () => {} : () => {
                             setReschedule(2)
-                            setRescheduleLocation(location.location)
+                            setRescheduleLocation(location.id)
                             console.log(location)
                           },
                           className: styles.location,
@@ -220,10 +242,12 @@ export default function AppointmentList({ locations, dependents }) {
                   <div>
                     <p className={styles["appointment-info-label"]}>Customer:</p>
                     <p className={styles["appointment-info-content"]}>
-                      {appointments?.[selectedAppointment]?.dependent == null
-                        ? currentUser.name
-                        : depsById[appointments?.[selectedAppointment]?.dependent]
-                          .name}
+                      {getAppointmentClientName(
+                        appointments[selectedAppointment],
+                        currentUser,
+                        depsById,
+                        { full: true }
+                      )}
                     </p>
                   </div>
                   <div>
