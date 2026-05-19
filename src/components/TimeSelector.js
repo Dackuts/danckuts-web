@@ -117,13 +117,12 @@ export default function TimeSelector({
                     <p
                       onClick={() =>
                         navigate(
-                          `/schedule?time=${d}&rescheduled=${reschedule ? appointmentId : false
-                          }&location=${location}`
+                          `/schedule?time=${DateTime.fromFormat(`${selected} ${d}`, "yyyy-LL-dd h:mm a").toISO()}&rescheduled=${reschedule ? appointmentId : false}&location=${location}`
                         )
                       }
                       className={`number ${styles["time-text"]}`}
                     >
-                      {DateTime.fromISO(d).toFormat("hh : mm a")}
+                      {DateTime.fromFormat(d, "h:mm a").toFormat("hh : mm a")}
                     </p>
                     {/* <span className={`${styles["slot-text"]}`}>{availability.slots[selected][d]} available</span> */}
                   </div>
