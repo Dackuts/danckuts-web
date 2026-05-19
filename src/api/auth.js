@@ -7,7 +7,7 @@ export function postSendTextCode(phoneNumber) {
 }
 
 export function postCheckTextCode({ phoneNumber, code }) {
-  return api.post(`${BASE_URL}/check-text-code`, {
+  return api.post(`${BASE_URL}/web/verify-code`, {
     phoneNumber,
     code,
   });
