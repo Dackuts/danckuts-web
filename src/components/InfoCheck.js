@@ -26,20 +26,20 @@ export default function InfoCheck({
 
   useEffect(() => {
     async function fetchData() {
-      // eslint-disable-next-line eqeqeq
-      if (token != "" && name == "" && dependents == null) {
-        const {
-          user: { name, dependents, restrictionLevel },
-        } = await getMe();
-        setLoading(false);
-        if (name) {
-          setName(name);
+      if (token && name === "" && dependents === null) {
+        try {
+          const {
+            user: { name: fetchedName, dependents: fetchedDependents, restrictionLevel },
+          } = await getMe();
+          setLoading(false);
+          if (fetchedName) setName(fetchedName);
+          if (fetchedDependents) setDependents(fetchedDependents);
+          setRestrictionlevel(restrictionLevel);
+          setStep("continue");
+        } catch (_err) {
+          setStep("requestPhone");
         }
-        if (dependents) {
-          setDependents(dependents);
-        }
-        setRestrictionlevel(restrictionLevel)
-      } else {
+      } else if (token) {
         setStep("continue");
       }
     }
