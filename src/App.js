@@ -40,7 +40,6 @@ export default function App() {
 	useEffect(() => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const redirectUrl = urlParams.get("r");
-		const queryToken = urlParams.get("token");
 		const utm_source = urlParams.get("utm_source");
 		const utm_term = urlParams.get("utm_term");
 		const utm_medium = urlParams.get("utm_medium");
@@ -56,15 +55,6 @@ export default function App() {
 			fbclid,
 		};
 		try {
-			const pastToken = localStorage.getItem("token");
-			if (pastToken != null) {
-				setToken(pastToken);
-			}
-		} catch (_err) { }
-		if (queryToken != null) {
-			setToken(queryToken);
-		}
-		try {
 			if (redirectUrl != null) {
 				localStorage.setItem("redirectUrl", redirectUrl)
 			}
@@ -74,7 +64,7 @@ export default function App() {
 				localStorage.setItem("queryGoogleTag", JSON.stringify(queryGoogleTag));
 			}
 		} catch (_err) { }
-	}, [setToken]);
+	}, []);
 
 	return (
 		<main className={`${styles.main} card`}>
