@@ -2,7 +2,7 @@ import styles from "./App.module.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScheduleAppointment from "./routes/ScheduleAppointment";
 import SelectAppointment from "./routes/SelectAppointment";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllLocations } from "./api/locations";
 import InfoCheck from "./components/InfoCheck";
 import AppointmentList from "./routes/AppointmentList";
@@ -10,9 +10,7 @@ import { useTokenStore } from "./store";
 import { Settings } from "luxon";
 
 export default function App() {
-	const { token: storedToken, setToken } = useTokenStore((state) => state);
-	const urlToken = useMemo(() => new URLSearchParams(window.location.search).get("token"), []);
-	const token = urlToken ?? storedToken;
+	const { token, setToken } = useTokenStore((state) => state);
 	const [name, setName] = useState("");
 	const [dependents, setDependents] = useState(null);
 	const [locations, setLocations] = useState(null);
